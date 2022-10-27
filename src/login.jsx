@@ -1,10 +1,14 @@
 import React, { Component } from 'react';
-import Layout from './layout/layout';
-class Login extends Component {
-    state = {  } 
-    render() { 
-        return (<><Layout /><h1>i am good</h1></>);
-    }
+import Button from 'react-bootstrap/Button';
+
+
+function Login(props)  {
+    
+    
+    
+        return (
+            <Button onClick={props.loginstatus} variant="primary">Primary</Button>);
+    
 
 }
  

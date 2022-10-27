@@ -1,21 +1,31 @@
-import React from 'react';
+import React, { useState ,useEffect} from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
-import App from './App/App';
+import App from './Home/App';
 import reportWebVitals from './reportWebVitals';
 import {BrowserRouter,Routes,Route} from 'react-router-dom';
 import Login from './login';
+import Layout from './layout/layout';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 
+
+
+
+
 export default function Index(){
+  const [loginStatus,setLoginStatus]=useState(false);
+  useEffect(()=>{
+  setLoginStatus(true);
+  },[])
   return(
     <BrowserRouter>
+    <Layout loginstatus={loginStatus} />
     <Routes>
      
-      <Route path="/" />
+      <Route path="/" /> 
       <Route index element={<App />}/>
-      <Route path="login" element={<Login />}/>
+      <Route path="login" element={<Login loginstatus={useEffect}/>}/>
       
 
     </Routes>

@@ -1,10 +1,12 @@
 
 
-
+import Newsnavbar from './Newsnavbar.js';
 import Layout from '../layout/layout.jsx';
 
+
 function App() {
-  return (<Layout />
+  return (<><Newsnavbar /></>
+
   )
 }
 
