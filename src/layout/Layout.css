@@ -1,0 +1,14 @@
+@media screen and (max-width:500px){
+    .container {
+        margin: 0%;
+
+    }
+    
+}
+.container {
+    margin-left:10% ;
+    margin-right:10% ;
+}
+.navbar-dark {
+    color:red;
+}
