@@ -1,32 +1,49 @@
-import React, { useState ,useEffect} from 'react';
+import React, { Component, useEffect, useState } from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
-import App from './Home/App';
+import App from './App/App';
 import reportWebVitals from './reportWebVitals';
 import {BrowserRouter,Routes,Route} from 'react-router-dom';
-import Login from './login';
+import Login from './Authentication/login';
 import Layout from './layout/layout';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import Register from './Authentication/Register';
 
 
 
+function Index(){
+//export default class Index extends Component{
+/*  const [loginStatus,setLoginStatus]=useState({loginStatus:false}); 
+ /* function handlelogout(){
+  setLoginStatus({loginStatus:false})
+  console.log("logouted")
+ } */
+/*  const
+ setLoginStatus(localStorage.getItem('logintatus'))
+ console.log(loginStatus) */ 
+  const [loginStatus, setLoginStatus] = useState(false);
 
+ function handlelogout() {
+  setLoginStatus(false);
+  console.log("logged out");
+}  
+/* state={loginstatus:false};
+componentDidMount=()=>{
 
-
-export default function Index(){
-  const [loginStatus,setLoginStatus]=useState(false);
-  useEffect(()=>{
-  setLoginStatus(true);
-  },[])
+} */
+//render(){
+  //console.log("index: "+loginStatus)
   return(
     <BrowserRouter>
-    <Layout loginstatus={loginStatus} />
+    <Layout  loginstatus={loginStatus} // <-- boolean true/false
+  logout={handlelogout}  />
     <Routes>
      
       <Route path="/" /> 
-      <Route index element={<App />}/>
-      <Route path="login" element={<Login loginstatus={useEffect}/>}/>
       
+      <Route index element={<App />}/>
+      <Route path="login" element={<Login   login={()=>{setLoginStatus(true);console.log("login")} } />}/>
+      <Route path="register" element={<Register />}/>
 
     </Routes>
     </BrowserRouter>

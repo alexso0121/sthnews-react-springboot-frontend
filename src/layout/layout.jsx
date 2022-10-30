@@ -5,17 +5,23 @@ import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import NavDropdown from 'react-bootstrap/NavDropdown';
 import './Layout.css'
-
+import 'bootstrap/dist/css/bootstrap.min.css';
 import { useState } from 'react';
+import {loginStatus} from '../Authentication/login'
+import { useLocation } from 'react-router-dom';
 
 
 
-function Layout(props) {
-  const loginstatus=props.loginstatus;
- 
- 
 
-  
+function Layout(props){
+  /* let loginStatus=localStorage.getItem('loginstatus');
+  console.log(loginStatus)
+  function handlelogout(){
+  console.log('logout')
+  return localStorage.setItem("loginstatus",false)}  */
+  const loginStatus=props.loginstatus
+
+  console.log("layout: "+loginStatus)
   return (
     <Navbar style={{"backgroundColor":"rgb(146, 212, 246)"}} variant='dark'expand="lg">
       <Container className="container" fluid >
@@ -29,8 +35,8 @@ function Layout(props) {
           >
             <Nav.Link style={{'color':"white"}} href="/">Home</Nav.Link>
            
-             {loginstatus ?
-             <><Nav.Link style={{ 'color': "white" }} href="#">Logout</Nav.Link><NavDropdown style={{ 'color': "white" }} title="Your account" id="navbarScrollingDropdown">
+             {loginStatus ===true ?
+             <><form onSubmit={props.logout}><Nav.Link style={{ 'color': "white" }} href='/' type='submit'>Logout</Nav.Link></form>{/* <Nav.Link onClick={handlelogout} style={{ 'color': "white" }} href='/' type='submit'>Logout</Nav.Link> */}<NavDropdown style={{ 'color': "white" }} title="Your account" id="navbarScrollingDropdown">
               <NavDropdown.Item href="#action3">Stored News</NavDropdown.Item>
               <NavDropdown.Item href="#action4">
                 History
@@ -40,7 +46,8 @@ function Layout(props) {
                 Personal infomation
               </NavDropdown.Item>
             </NavDropdown></>:
-            <Nav.Link style={{'color':"white"}} href="/login">Login</Nav.Link>
+            <><Nav.Link style={{ 'color': "white" }} href="/login">Login</Nav.Link>
+            <Nav.Link style={{ 'color': "white" }} href="/register">New Register</Nav.Link></>
            }
 
             
