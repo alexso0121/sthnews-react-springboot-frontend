@@ -27,23 +27,21 @@ function Index(){
   setLoginStatus(false);
   console.log("logged out");
 }  
-/* state={loginstatus:false};
-componentDidMount=()=>{
 
-} */
-//render(){
-  //console.log("index: "+loginStatus)
+const login=()=>{console.log("loginstatus"+loginStatus)
+  setLoginStatus(true);console.log("login")} 
   return(
     <BrowserRouter>
     <Layout  loginstatus={loginStatus} // <-- boolean true/false
   logout={handlelogout}  />
     <Routes>
      
-      <Route path="/" /> 
+      {/* <Route path="/" />  */}
       
-      <Route index element={<App />}/>
-      <Route path="login" element={<Login   login={()=>{setLoginStatus(true);console.log("login")} } />}/>
-      <Route path="register" element={<Register />}/>
+      <Route path="/" element={<App />} />
+      <Route path="/:id" element={<App />} />
+      <Route path="/login" element={<Login   login={login } />}/>
+      <Route path="/register" element={<Register />}/>
 
     </Routes>
     </BrowserRouter>

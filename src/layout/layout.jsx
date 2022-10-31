@@ -20,6 +20,7 @@ function Layout(props){
   console.log('logout')
   return localStorage.setItem("loginstatus",false)}  */
   const loginStatus=props.loginstatus
+  
 
   console.log("layout: "+loginStatus)
   return (

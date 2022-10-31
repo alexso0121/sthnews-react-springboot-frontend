@@ -9,12 +9,25 @@ import Form from 'react-bootstrap/Form';
 
 
  const Login=(props)=>  {
+    /* const handlesubmit=(event)=>{
+        event.preventDefault();
+        //get the data in submit base on the control id
+        console.log(event.target.formBasicName.value);
+        const data=event.target.formBasicName.value;
+        console.log(data);
+        localStorage.setItem("name",data)
+    } */
+    function handlesubmit(e){
+        //must need
+        e.preventDefault();
+        props.login();
+    }
     
     
     return (
         <><div className='Registerform'>
             <h3>Login Form</h3><br></br>
-            <Form onSubmit={props.login}>
+            <Form onSubmit=/* {handlesubmit} */{handlesubmit} >
                 <Form.Group className="mb-3" controlId="formBasicName">
                     <Form.Label>Username</Form.Label>
                     <Form.Control type="username" placeholder="Enter your username" />
@@ -34,8 +47,11 @@ import Form from 'react-bootstrap/Form';
                 <Button variant="primary" type="submit">
                     Submit
                 </Button>
-            </Form></div><Button onClick={props.login} variant="primary">Primary</Button> </>/* <Link
-        to={{pathname:'/layout',state:loginStatus}} />*/)}
+            </Form>
+            </div>
+            
+            <Button onClick={props.login} variant="primary">Primary</Button> </>) }//<--- this works fine <Link
+        //to={{pathname:'/layout',state:loginStatus}} />*/)}
     
 
 
