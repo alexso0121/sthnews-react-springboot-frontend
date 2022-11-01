@@ -1,5 +1,24 @@
 .wholecard {
-    margin-top: 5px;
+    margin-top: 10px;
     margin-left: 10%;
     margin-right:10%
+}
+
+.newsitem {
+    display:block;
+    border:1px solid black;
+    padding: 10px;
+    margin-left: 15%;
+    margin-right:15%
+}
+
+@media screen and (max-width:500px) {
+    .wholecard{
+        margin-left: 0;
+    margin-right:0
+    }
+    .newsitem{
+        margin-left: 0;
+    margin-right:0
+    }
 }

@@ -9,18 +9,20 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import { useState } from 'react';
 import {loginStatus} from '../Authentication/login'
 import { useLocation } from 'react-router-dom';
+import { useRef } from 'react';
 
 
 
 
 function Layout(props){
-  /* let loginStatus=localStorage.getItem('loginstatus');
-  console.log(loginStatus)
-  function handlelogout(){
-  console.log('logout')
-  return localStorage.setItem("loginstatus",false)}  */
+ 
   const loginStatus=props.loginstatus
-  
+  const searchref=useRef(null)
+  function handlesubmit(e){
+    e.preventDefault();
+    console.log("search"+searchref.current.value);
+    props.search();
+  }
 
   console.log("layout: "+loginStatus)
   return (
@@ -56,14 +58,15 @@ function Layout(props){
            
           </Nav>
           
-          <Form className="d-flex">
+          <Form onSubmit={handlesubmit} className="d-flex">
             <Form.Control
+              ref={searchref}
               type="search"
               placeholder="Search News"
               className="me-2"
               aria-label="Search News"
             />
-            <Button variant="outline-success">Search</Button>
+            <Button type='submit' variant="outline-success">Search</Button>
           </Form>
         </Navbar.Collapse>
       </Container>

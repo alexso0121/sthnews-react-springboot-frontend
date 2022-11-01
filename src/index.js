@@ -27,13 +27,14 @@ function Index(){
   setLoginStatus(false);
   console.log("logged out");
 }  
+function handlesearch(){}
 
 const login=()=>{console.log("loginstatus"+loginStatus)
   setLoginStatus(true);console.log("login")} 
   return(
     <BrowserRouter>
     <Layout  loginstatus={loginStatus} // <-- boolean true/false
-  logout={handlelogout}  />
+  logout={handlelogout} search={handlesearch} />
     <Routes>
      
       {/* <Route path="/" />  */}
