@@ -8,7 +8,7 @@ import './Layout.css'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { useState } from 'react';
 import {loginStatus} from '../Authentication/login'
-import { useLocation } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { useRef } from 'react';
 
 
@@ -18,10 +18,11 @@ function Layout(props){
  
   const loginStatus=props.loginstatus
   const searchref=useRef(null)
+  const navigate=useNavigate();
   function handlesubmit(e){
     e.preventDefault();
     console.log("search"+searchref.current.value);
-    props.search();
+    navigate("/"+searchref.current.value)
   }
 
   console.log("layout: "+loginStatus)

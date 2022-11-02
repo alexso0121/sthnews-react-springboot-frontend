@@ -26,6 +26,7 @@ const App=()=>{
   const business="country=us&category=business"
   const sports="country=us&category=sports"
   const tech="country=us&category=technology"
+  const search="q="+id
   
   useEffect( ()=>{
     
@@ -46,7 +47,7 @@ const App=()=>{
       }else if(id==="5"){
         newsurl=sports
       }
-      else{newsurl=initialstate}
+      else{newsurl=search}
       
       const getArticles = async () => {
         
@@ -60,11 +61,33 @@ const App=()=>{
      // console.log(newsurl)
       // Whatever else we want to do after the state has been updated.
    }, [])
+   function result(){
+    if(articles){
+      return <div className='newsitem'>
+   
+      {articles?.map(({title,description,url,urlToImage,publishedAt,source})=>(
+      <NewsItem
+      title={title} 
+      desciption={description} 
+      url={url} 
+      urlToImage={urlToImage}
+      publishedAt={publishedAt}
+      source={source.name} /> 
+  ))} </div>;}else{
+    return <h1>No related News found</h1>
+  }
+        
+    }
+   
 
   
             //return "https://newsapi.org/v2/top-headlines?country=us&apiKey=c75d8c8ba2f1470bb24817af1ed669ee";}
  
-  return (<><Newsnavbar /><div className='newsitem'>{articles?.map(({title,description,url,urlToImage,publishedAt,source})=>(
+  return (<><Newsnavbar />
+  {articles===false&&<h2>No related news found</h2>}
+  <div className='newsitem'>
+   
+    {articles?.map(({title,description,url,urlToImage,publishedAt,source})=>(
     <NewsItem
     title={title} 
     desciption={description} 
@@ -72,7 +95,7 @@ const App=()=>{
     urlToImage={urlToImage}
     publishedAt={publishedAt}
     source={source.name} /> 
-))  } </div></>
+))} </div></>
 
   )
 }

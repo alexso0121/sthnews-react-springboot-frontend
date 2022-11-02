@@ -15,7 +15,8 @@
 @media screen and (max-width:500px) {
     .wholecard{
         margin-left: 0;
-    margin-right:0
+    margin-right:0;
+    
     }
     .newsitem{
         margin-left: 0;

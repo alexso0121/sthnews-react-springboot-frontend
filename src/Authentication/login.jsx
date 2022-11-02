@@ -2,6 +2,11 @@
 import Button from 'react-bootstrap/Button';
 import './Auth.css'
 import Form from 'react-bootstrap/Form';
+import { useState } from 'react';
+import { useEffect } from 'react';
+import Axios  from 'axios';
+import { useRef } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 
 
@@ -9,19 +14,80 @@ import Form from 'react-bootstrap/Form';
 
 
  const Login=(props)=>  {
-    /* const handlesubmit=(event)=>{
-        event.preventDefault();
-        //get the data in submit base on the control id
-        console.log(event.target.formBasicName.value);
-        const data=event.target.formBasicName.value;
-        console.log(data);
-        localStorage.setItem("name",data)
-    } */
+    const [password,setPassword]=useState("null");
+    const [readytosubmit,setReadytosubmit]=useState(false)
+    const [ablelogin,setAblelogin]=useState(false)
+
+    const nameRef=useRef("");
+    const navigate=useNavigate();
+    //var name=nameRef.current.value;
+    const passwordRef=useRef("hfs");
+    console.log(nameRef.current.value)
+    
+/* 
+    useEffect(()=>{ 
+        const getArticles = async () => {
+            
+            const res = await Axios.get("http://localhost:8080/api/password/"+name);
+             setPassword(res.data);
+            //console.log(password); 
+            console.log(res.data)};getArticles()} ,[password] )
+            
+            
+          // getArticles()}} ,[readytosubmit]   
+    
+        
+       
+    console.log(password)
     function handlesubmit(e){
         //must need
         e.preventDefault();
+        //setAblelogin(true)
+       
+       if(passwordRef.current.value.toString()===password.toString()){
+        console.log("Ture Password")
         props.login();
+        navigate("/")
+    }else{
+        console.log("false password")
     }
+  }; */
+  function handlesubmit(e){
+    e.preventDefault();
+    getArticles(e);
+    //e.target.reset();
+   
+}
+
+const getArticles = async (e) => {
+        
+    const res = await Axios.get("http://localhost:8080/api/password/"+nameRef.current.value);
+    console.log(res.data)
+    if(passwordRef.current.value===res.data){
+        console.log("Ture Password")
+        props.handleusername(nameRef.current.value)
+        props.login();
+        navigate('/');
+    }else{
+        console.log("false password")
+        e.target.reset();
+    }
+};
+        
+        
+    
+   /*  useEffect(()=>{
+        console.log(nameRef.current.value)
+        console.log(password) 
+        console.log(passwordRef.current.value)
+        if(passwordRef.current.value.toString()===password.toString()&&setReadytosubmit!==false){
+            console.log("Ture Password")
+        props.login()
+        //navigate('/');
+        }else{
+            console.log("false password")
+        }
+    },[setReadytosubmit,password]) */
     
     
     return (
@@ -30,7 +96,7 @@ import Form from 'react-bootstrap/Form';
             <Form onSubmit=/* {handlesubmit} */{handlesubmit} >
                 <Form.Group className="mb-3" controlId="formBasicName">
                     <Form.Label>Username</Form.Label>
-                    <Form.Control type="username" placeholder="Enter your username" />
+                    <Form.Control ref={nameRef} type="username" placeholder="Enter your username" />
 
                 </Form.Group><br></br>
                 
@@ -38,7 +104,7 @@ import Form from 'react-bootstrap/Form';
 
                 <Form.Group className="mb-3" controlId="formBasicPassword">
                     <Form.Label>Password</Form.Label>
-                    <Form.Control type="password" placeholder="Password" />
+                    <Form.Control ref={passwordRef} type="password" placeholder="Password" />
                     
                 </Form.Group><br></br>
 

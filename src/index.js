@@ -1,7 +1,7 @@
 import React, { Component, useEffect, useState } from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
-import App from './App/App';
+import App from './News/News';
 import reportWebVitals from './reportWebVitals';
 import {BrowserRouter,Routes,Route} from 'react-router-dom';
 import Login from './Authentication/login';
@@ -22,26 +22,30 @@ function Index(){
  setLoginStatus(localStorage.getItem('logintatus'))
  console.log(loginStatus) */ 
   const [loginStatus, setLoginStatus] = useState(false);
+ //const [username,setUsername]=useState('')
+ var username; 
 
  function handlelogout() {
   setLoginStatus(false);
   console.log("logged out");
 }  
-function handlesearch(){}
 
+function handlesearch(searchvalue){console.log(searchvalue)}
+//const handleusername=(name)=>{setUsername}
+console.log("username:" +username)   
 const login=()=>{console.log("loginstatus"+loginStatus)
   setLoginStatus(true);console.log("login")} 
   return(
     <BrowserRouter>
     <Layout  loginstatus={loginStatus} // <-- boolean true/false
-  logout={handlelogout} search={handlesearch} />
+  logout={handlelogout}/*  search={(searchvalue)=>handlesearch({searchvalue})} */ />
     <Routes>
      
       {/* <Route path="/" />  */}
-      
+   
       <Route path="/" element={<App />} />
       <Route path="/:id" element={<App />} />
-      <Route path="/login" element={<Login   login={login } />}/>
+      <Route path="/login" element={<Login   login={login } handleusername={(name)=>{username=name;console.log("username: "+username)}} />}/>
       <Route path="/register" element={<Register />}/>
 
     </Routes>

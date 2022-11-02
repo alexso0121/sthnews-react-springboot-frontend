@@ -4,7 +4,7 @@ function Newsnavbar() {
   return (
     <Nav justify variant="tabs" defaultActiveKey="/home">
       <Nav.Item>
-        <Nav.Link style={{'color':'black'}} href="/1">Top news</Nav.Link>
+        <Nav.Link style={{'color':'black'}} href="/1"><nobr>Top news</nobr></Nav.Link>
       </Nav.Item>
       <Nav.Item>
         <Nav.Link style={{'color':'black'}} href="/2">Local</Nav.Link>
