@@ -1,4 +1,4 @@
-import React, { Component, useEffect, useState } from 'react';
+import React, { Component, useEffect, useMemo, useState } from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './News/News';
@@ -8,47 +8,62 @@ import Login from './Authentication/login';
 import Layout from './layout/layout';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Register from './Authentication/Register';
+import Info from './Personal/info';
+import Updateuser from './Personal/updateuser';
+import Article from './News/Article';
+import History from './Personal/History';
+import { AuthProvider, Usercontext } from './Usercontext';
 
 
 
 function Index(){
-//export default class Index extends Component{
-/*  const [loginStatus,setLoginStatus]=useState({loginStatus:false}); 
- /* function handlelogout(){
-  setLoginStatus({loginStatus:false})
-  console.log("logouted")
- } */
-/*  const
- setLoginStatus(localStorage.getItem('logintatus'))
- console.log(loginStatus) */ 
-  const [loginStatus, setLoginStatus] = useState(false);
- //const [username,setUsername]=useState('')
+
+  //const [loginStatus, setLoginStatus] = useState(false);
+  const [userStatus, setUserStatus] = useState();
+ // const providerValue=useMemo(()=>({userStatus,setUserStatus}),[userStatus,setUserStatus])
  var username; 
 
- function handlelogout() {
-  setLoginStatus(false);
-  console.log("logged out");
-}  
+ /* const handlelogout = () =>{
+  localStorage.removeItem("loginstatus")
+  console.log("logout")
+  setUserStatus(false)
+} */
 
-function handlesearch(searchvalue){console.log(searchvalue)}
-//const handleusername=(name)=>{setUsername}
-console.log("username:" +username)   
-const login=()=>{console.log("loginstatus"+loginStatus)
-  setLoginStatus(true);console.log("login")} 
+
+/* console.log("username:" +username)   
+const login = () => {
+  localStorage.setItem("loginstatus", "1");
+  console.log("login")
+  setUserStatus(true);
+};
+useEffect(() => {
+  const isUserLogined = localStorage.getItem("loginstatus");
+  setUserStatus(Boolean(isUserLogined));
+}, []); */
+const alex='alex'
   return(
     <BrowserRouter>
-    <Layout  loginstatus={loginStatus} // <-- boolean true/false
-  logout={handlelogout}/*  search={(searchvalue)=>handlesearch({searchvalue})} */ />
-    <Routes>
-     
-      {/* <Route path="/" />  */}
-   
-      <Route path="/" element={<App />} />
-      <Route path="/:id" element={<App />} />
-      <Route path="/login" element={<Login   login={login } handleusername={(name)=>{username=name;console.log("username: "+username)}} />}/>
-      <Route path="/register" element={<Register />}/>
+    
 
-    </Routes>
+
+    <Layout  /* loginstatus={loginStatus}  */// <-- boolean true/false
+ /*  logout={handlelogout} */ userStatus={userStatus}
+ /*  search={(searchvalue)=>handlesearch({searchvalue})} */ />
+     <Routes>
+     
+    
+      <Route path="/" element={<App />} />
+      <Route path="/" element={<App />} />
+      
+      <Route path="/login" element={<Login   /* login={login } */ /* handleusername={(name)=>{username=name;console.log("username: "+username)}} */ />}/>
+      <Route path="/register" element={<Register /* login={login } handleusername={(name)=>{username=name;console.log("username: "+username)}} *//>}/>
+      <Route path="/info" element={<Info  />}/>
+      <Route path="/updateuser" element={<Updateuser  />}/>
+      <Route path="/article/:id/get" element={<Article  />}/>
+      <Route path="/history/:id/get" element={<History  />}/>
+      
+      </Routes>
+    
     </BrowserRouter>
   )
 } 

@@ -7,6 +7,8 @@ import { useEffect } from 'react';
 import Axios  from 'axios';
 import { useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useAuth, Usercontext } from '../Usercontext';
+import { useContext } from 'react';
 
 
 
@@ -14,6 +16,10 @@ import { useNavigate } from 'react-router-dom';
 
 
  const Login=(props)=>  {
+    /* const {userStatus, setUserStatus}=useContext(Usercontext)
+    const [user,setUser]=useState('')
+    const auth=useAuth()
+  console.log(userStatus) */
     const [password,setPassword]=useState("null");
     const [readytosubmit,setReadytosubmit]=useState(false)
     const [ablelogin,setAblelogin]=useState(false)
@@ -24,50 +30,29 @@ import { useNavigate } from 'react-router-dom';
     const passwordRef=useRef("hfs");
     console.log(nameRef.current.value)
     
-/* 
-    useEffect(()=>{ 
-        const getArticles = async () => {
-            
-            const res = await Axios.get("http://localhost:8080/api/password/"+name);
-             setPassword(res.data);
-            //console.log(password); 
-            console.log(res.data)};getArticles()} ,[password] )
-            
-            
-          // getArticles()}} ,[readytosubmit]   
-    
-        
-       
-    console.log(password)
-    function handlesubmit(e){
-        //must need
-        e.preventDefault();
-        //setAblelogin(true)
-       
-       if(passwordRef.current.value.toString()===password.toString()){
-        console.log("Ture Password")
-        props.login();
-        navigate("/")
-    }else{
-        console.log("false password")
-    }
-  }; */
+
   function handlesubmit(e){
     e.preventDefault();
-    getArticles(e);
+    getPassword(e);
     //e.target.reset();
    
 }
 
-const getArticles = async (e) => {
+const getPassword = async (e) => {
         
-    const res = await Axios.get("http://localhost:8080/api/password/"+nameRef.current.value);
-    console.log(res.data)
-    if(passwordRef.current.value===res.data){
-        console.log("Ture Password")
-        props.handleusername(nameRef.current.value)
-        props.login();
+    const res = await Axios.get("http://localhost:8080/api/User/"+nameRef.current.value);
+    console.log(res.data.password)
+    if(passwordRef.current.value===res.data.password){
+        console.log("Ture Password");
+        console.log(nameRef.current.value)
+        console.log(res.data.id)
+        localStorage.setItem('userid',res.data.id)
+        localStorage.setItem('name',nameRef.current.value)
+        localStorage.setItem('loginstatus',true);
+        
         navigate('/');
+        window.location.reload()
+
     }else{
         console.log("false password")
         e.target.reset();
@@ -76,18 +61,7 @@ const getArticles = async (e) => {
         
         
     
-   /*  useEffect(()=>{
-        console.log(nameRef.current.value)
-        console.log(password) 
-        console.log(passwordRef.current.value)
-        if(passwordRef.current.value.toString()===password.toString()&&setReadytosubmit!==false){
-            console.log("Ture Password")
-        props.login()
-        //navigate('/');
-        }else{
-            console.log("false password")
-        }
-    },[setReadytosubmit,password]) */
+ 
     
     
     return (
@@ -115,8 +89,7 @@ const getArticles = async (e) => {
                 </Button>
             </Form>
             </div>
-            
-            <Button onClick={props.login} variant="primary">Primary</Button> </>) }//<--- this works fine <Link
+             </>) }//<--- this works fine <Link
         //to={{pathname:'/layout',state:loginStatus}} />*/)}
     
 

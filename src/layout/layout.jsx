@@ -6,26 +6,37 @@ import Navbar from 'react-bootstrap/Navbar';
 import NavDropdown from 'react-bootstrap/NavDropdown';
 import './Layout.css'
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import {loginStatus} from '../Authentication/login'
 import { useNavigate } from 'react-router-dom';
 import { useRef } from 'react';
+import { useContext } from 'react';
+import { Usercontext } from '../Usercontext';
 
 
 
 
 function Layout(props){
+  const userStatus=localStorage.getItem('loginstatus')
+  const userid=localStorage.getItem("userid")
+  const historyhref="/history/"+userid+"/get"
+  
  
-  const loginStatus=props.loginstatus
-  const searchref=useRef(null)
-  const navigate=useNavigate();
-  function handlesubmit(e){
-    e.preventDefault();
-    console.log("search"+searchref.current.value);
-    navigate("/"+searchref.current.value)
-  }
+ useEffect(()=>{
+  localStorage.getItem('loginstatus')
+ },[])
 
-  console.log("layout: "+loginStatus)
+ function logout(){
+  console.log("logout")
+  localStorage.removeItem('loginstatus')
+  localStorage.removeItem('name')  
+  localStorage.removeItem('userid')
+  localStorage.removeItem('userinfo')
+ }
+  
+  
+  console.log(userStatus)
+  console.log("layout: "+userStatus)
   return (
     <Navbar style={{"backgroundColor":"rgb(146, 212, 246)"}} variant='dark'expand="lg">
       <Container className="container" fluid >
@@ -34,19 +45,18 @@ function Layout(props){
         <Navbar.Collapse id="navbarScroll">
           <Nav
             className="me-auto my-2 my-lg-0"
-            style={{ 'fontSize': '20px' }}
             navbarScroll
           >
             <Nav.Link style={{'color':"white"}} href="/">Home</Nav.Link>
            
-             {loginStatus ===true ?
-             <><form onSubmit={props.logout}><Nav.Link style={{ 'color': "white" }} href='/' type='submit'>Logout</Nav.Link></form>{/* <Nav.Link onClick={handlelogout} style={{ 'color': "white" }} href='/' type='submit'>Logout</Nav.Link> */}<NavDropdown style={{ 'color': "white" }} title="Your account" id="navbarScrollingDropdown">
+             {userStatus === 'true' ?
+             <><Nav.Link onClick={logout} style={{ 'color': "white" }} href='/' type='submit'>Logout</Nav.Link>{/* <Nav.Link onClick={handlelogout} style={{ 'color': "white" }} href='/' type='submit'>Logout</Nav.Link> */}<NavDropdown style={{ 'color': "white" }} title="Your account" id="navbarScrollingDropdown">
               <NavDropdown.Item href="#action3">Stored News</NavDropdown.Item>
-              <NavDropdown.Item href="#action4">
+              <NavDropdown.Item href={historyhref}>
                 History
               </NavDropdown.Item>
               <NavDropdown.Divider />
-              <NavDropdown.Item href="#action5">
+              <NavDropdown.Item href="/info">
                 Personal infomation
               </NavDropdown.Item>
             </NavDropdown></>:
@@ -59,7 +69,7 @@ function Layout(props){
            
           </Nav>
           
-          <Form onSubmit={handlesubmit} className="d-flex">
+          {/* <Form onSubmit={handlesubmit} className="d-flex">
             <Form.Control
               ref={searchref}
               type="search"
@@ -68,7 +78,7 @@ function Layout(props){
               aria-label="Search News"
             />
             <Button type='submit' variant="outline-success">Search</Button>
-          </Form>
+          </Form> */}
         </Navbar.Collapse>
       </Container>
     </Navbar>
@@ -76,19 +86,3 @@ function Layout(props){
   }
 
 export default Layout;
-/*  function Layout(props) {
-    const loginstatus=props.loginstatus;
-    function islogin(loginstatus){
-      if(loginstatus) return
-      <><NavDropdown style={{ 'color': "white" }} title="Your account" id="navbarScrollingDropdown">
-        <NavDropdown.Item href="#action3">Stored News</NavDropdown.Item>
-        <NavDropdown.Item href="#action4">
-          History
-        </NavDropdown.Item>
-        <NavDropdown.Divider />
-        <NavDropdown.Item href="#action5">
-          Personal infomation
-        </NavDropdown.Item>
-      </NavDropdown><Nav.Link style={{ 'color': "white" }} href="#">Logout</Nav.Link></>;
-    return <Nav.Link style={{'color':"white"}} href="/login">Login</Nav.Link>
-    } */

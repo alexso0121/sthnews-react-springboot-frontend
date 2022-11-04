@@ -14,46 +14,34 @@ import NewsItem from './Newsitem.js';
 
 const App=()=>{
   let {id}=useParams()
+  console.log(id)
   /* const [newsurl,setNewsurl]=useState(()=>{
     const initialstate="https://newsapi.org/v2/top-headlines?country=us&apiKey=c75d8c8ba2f1470bb24817af1ed669ee"
     return initialstate;}) */
   //console.log(id);
   const [articles, setActicles] = useState([]);
-  /* const initialstate="https://newsapi.org/v2/top-headlines?country=us&apiKey=c75d8c8ba2f1470bb24817af1ed669ee"
-  const business="https://newsapi.org/v2/top-headlines?country=de&category=business&apiKey=c75d8c8ba2f1470bb24817af1ed669ee" */
-  const local="country=hk"
-  const initialstate="country=us"
-  const business="country=us&category=business"
-  const sports="country=us&category=sports"
-  const tech="country=us&category=technology"
-  const search="q="+id
+  const [isloading,setIsloading]=useState(true)
+  const local="sources=bbc-news&category=finance"
+  const initialstate="sources=bbc-news"
+ /*  const business="sources=bbc-news&category=business"
+  const sports="sources=bbc-news&category=sports"
+  const tech="sources=bbc-news&category=technology"
+  const search="q="+id+"&source=bbc-news" */
   
   useEffect( ()=>{
     
     },[])  
    
     useEffect(() => {
-      let newsurl;
-      if(id === undefined){
-      newsurl=initialstate;}
-      else if(id==="1"){
-        newsurl=initialstate
-      }else if(id==="2"){
-        newsurl=local
-      }else if(id==="3"){
-        newsurl=business
-      }else if(id==="4"){
-        newsurl=tech
-      }else if(id==="5"){
-        newsurl=sports
-      }
-      else{newsurl=search}
+      let newsurl=initialstate;
+      
       
       const getArticles = async () => {
         
         const res = await Axios.get("https://newsapi.org/v2/top-headlines?"+newsurl+"&apiKey=c75d8c8ba2f1470bb24817af1ed669ee");
         setActicles(res.data.articles);
-        console.log(res);
+        setIsloading(false);
+       
       };
       getArticles();
     }, [id]);
@@ -61,7 +49,7 @@ const App=()=>{
      // console.log(newsurl)
       // Whatever else we want to do after the state has been updated.
    }, [])
-   function result(){
+   /* function result(){
     if(articles){
       return <div className='newsitem'>
    
@@ -77,14 +65,15 @@ const App=()=>{
     return <h1>No related News found</h1>
   }
         
-    }
+    } */
+    //console.log(articles)
    
 
   
             //return "https://newsapi.org/v2/top-headlines?country=us&apiKey=c75d8c8ba2f1470bb24817af1ed669ee";}
  
-  return (<><Newsnavbar />
-  {articles===false&&<h2>No related news found</h2>}
+  return (<>{/* <Newsnavbar /> */}
+  {isloading===true?<div className='loading'><h1><strong>Loading News</strong></h1></div>:
   <div className='newsitem'>
    
     {articles?.map(({title,description,url,urlToImage,publishedAt,source})=>(
@@ -95,9 +84,9 @@ const App=()=>{
     urlToImage={urlToImage}
     publishedAt={publishedAt}
     source={source.name} /> 
-))} </div></>
+))} </div>}</>
 
-  )
-}
+  )}
+
 
 export default App;

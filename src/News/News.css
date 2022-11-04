@@ -12,6 +12,11 @@
     margin-right:15%
 }
 
+.loading {
+    text-align: center;
+    margin: 10%;
+}
+
 @media screen and (max-width:500px) {
     .wholecard{
         margin-left: 0;
