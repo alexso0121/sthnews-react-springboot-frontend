@@ -10,5 +10,8 @@
     margin-right:20% ;
 }
 .navbar-dark {
-    color:red;
+    color:rgb(14, 18, 30);
+}
+.wholenavbar {
+    font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif ;
 }

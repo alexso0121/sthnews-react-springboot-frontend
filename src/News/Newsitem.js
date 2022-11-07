@@ -19,7 +19,7 @@ const NewsItem=({title,desciption,url,urlToImage,publishedAt,source})=>{
                         "date":date,"user_id":user_id};
             console.log(user);
     
-            fetch('http://localhost:8080/clicknews',{
+            fetch('http://newsbackend.us-west-2.elasticbeanstalk.com/clicknews',{
                 method:'POST',
                 headers:{"Content-Type":"application/json"},
                 body:JSON.stringify(user)
@@ -36,7 +36,7 @@ const NewsItem=({title,desciption,url,urlToImage,publishedAt,source})=>{
     return(
     <Card className="wholecard">
       <><Card.Img style={{"height":"500px"}} variant="top" src={urlToImage}/><Card.Body>
-            <a href="#" onClick={()=>sendarticle()}>{title}</a>
+            <a href="#" style={{"textDecoration":"none"}} onClick={()=>sendarticle()}><h3>{title}</h3></a>
             <Card.Text>
                {desciption}
             </Card.Text>
@@ -46,7 +46,7 @@ const NewsItem=({title,desciption,url,urlToImage,publishedAt,source})=>{
                 <ListGroup.Item>Date: {date}</ListGroup.Item>
             </ListGroup><Card.Body>
                 <Card.Link href={()=>sendarticle}>Go to the news</Card.Link>
-                <Card.Link href="#">Save news</Card.Link>
+                
             </Card.Body></>
     </Card>)
  

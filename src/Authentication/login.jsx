@@ -40,7 +40,7 @@ import { useContext } from 'react';
 
 const getPassword = async (e) => {
         
-    const res = await Axios.get("http://localhost:8080/api/User/"+nameRef.current.value);
+    const res = await Axios.get("http://newsbackend.us-west-2.elasticbeanstalk.com/api/User/"+nameRef.current.value);
     console.log(res.data.password)
     if(passwordRef.current.value===res.data.password){
         console.log("Ture Password");

@@ -6,15 +6,17 @@
     background-color: rgb(250, 231, 250);
     padding: 20px;
     border-radius: 25px;
-    border:5px solid rgb(244, 233, 250)
+    border:5px solid rgb(244, 233, 250);
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    color: rgb(44, 44, 63);
 }
 
 @media screen and (max-width:900px) {
     .Registerform{
-        margin-top:0px ;
+        margin-top:10px ;
         margin-right: 2%;
         margin-left: 2%;
-        border-radius: 0px;
+        border-radius: 5px;
         
     
 }}

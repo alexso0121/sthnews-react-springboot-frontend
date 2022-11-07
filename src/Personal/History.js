@@ -12,7 +12,7 @@ function History() {
     const [newsid,setNewsid]=useState(null)
     
           useEffect(()=>{
-         Axios.get("http://localhost:8080/gethistory/"+id).then((res)=>{
+         Axios.get("http://newsbackend.us-west-2.elasticbeanstalk.com/gethistory/"+id).then((res)=>{
             console.log(res.data)
             setData(res.data);
           
@@ -24,14 +24,14 @@ function History() {
         
      
      
-    return ( <div><ListGroup><ListGroup.Item>
+    return ( <div><div style={{"display":"block","text-align":"center","marginTop":"5%","marginBottom":"5%"}}><h2 ><strong>Search History</strong></h2></div><ListGroup>
         {data?.map(({title,user_id,id,url})=>(
         <Historyitem
         title={title} 
         user_id={user_id} 
         url={url} 
         id={id} /> 
-    ))}</ListGroup.Item></ListGroup></div> )
+    ))}</ListGroup></div> )
 }
 
 export default History ;

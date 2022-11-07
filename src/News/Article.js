@@ -1,6 +1,7 @@
     import { useState } from "react"
 import { SplitButton } from "react-bootstrap"
     import { useNavigate, useParams } from "react-router-dom"
+    import Button from 'react-bootstrap/Button';
     
     function Article () {
     const { id }=useParams()
@@ -13,7 +14,7 @@ import { SplitButton } from "react-bootstrap"
     const [content,setContent]=useState([])
     const [date,setDate]=useState([])
     const [url,setUrl]=useState([])
-   
+    const userid=localStorage.getItem("userid")
     
     
     
@@ -39,16 +40,40 @@ import { SplitButton } from "react-bootstrap"
         }
        
     }
+    function handlestored(){
+
+
+                const Stored={"user_id":userid,
+                                "news_id":id,
+                                "title":title,
+                            
+                           };
+                console.log(Stored);
+        
+                fetch('http://newsbackend.us-west-2.elasticbeanstalk.com/addstore',{
+                    method:'POST',
+                    headers:{"Content-Type":"application/json"},
+                    body:JSON.stringify(Stored)
+                }).then((res)=>{
+                    console.log("Stored a news");
+                    return res.json()
+                    
+                    
+                }).then((result=>{
+                   //alert
+                    
+                }))}
+    
     
     return ( /*  */
         
-       <div style={{"padding":"5px"}}>{islive}
+       <><div style={{ "padding": "5px" }}>{islive}
             <h3>{title}</h3>
-            <img src={image}></img>
+            <img style={{"width":"auto"}} src={image}></img>
             <p>{date}</p>
             <p><strong>{description}</strong></p>
-           <p style={{"lineHeight":"300%"}}>{content}</p>
-            
-        <a href={url}>go bbc news</a></div>
+            <p style={{ "lineHeight": "300%" }}>{content}</p>
+
+            <a  href={url}>go bbc news</a></div><Button onClick={handlestored} variant="warning">Stored as Favorite</Button></>
      );}
     export default Article;

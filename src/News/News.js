@@ -23,10 +23,7 @@ const App=()=>{
   const [isloading,setIsloading]=useState(true)
   const local="sources=bbc-news&category=finance"
   const initialstate="sources=bbc-news"
- /*  const business="sources=bbc-news&category=business"
-  const sports="sources=bbc-news&category=sports"
-  const tech="sources=bbc-news&category=technology"
-  const search="q="+id+"&source=bbc-news" */
+
   
   useEffect( ()=>{
     

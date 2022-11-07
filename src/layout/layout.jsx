@@ -20,6 +20,7 @@ function Layout(props){
   const userStatus=localStorage.getItem('loginstatus')
   const userid=localStorage.getItem("userid")
   const historyhref="/history/"+userid+"/get"
+  const storedhref="/stored/"+userid+"/get"
   
  
  useEffect(()=>{
@@ -38,9 +39,9 @@ function Layout(props){
   console.log(userStatus)
   console.log("layout: "+userStatus)
   return (
-    <Navbar style={{"backgroundColor":"rgb(146, 212, 246)"}} variant='dark'expand="lg">
+    <Navbar  style={{"backgroundColor":"rgb(14, 18, 30)","fontFamily":"sans-serif"}} variant='dark'expand="lg">
       <Container className="container" fluid >
-        <Navbar.Brand href="/"><strong>STH News</strong></Navbar.Brand>
+        <Navbar.Brand href="/"><strong  style={{"fontFamily":"sans-serif"}}>STH News</strong></Navbar.Brand>
         <Navbar.Toggle aria-controls="navbarScroll" />
         <Navbar.Collapse id="navbarScroll">
           <Nav
@@ -51,7 +52,7 @@ function Layout(props){
            
              {userStatus === 'true' ?
              <><Nav.Link onClick={logout} style={{ 'color': "white" }} href='/' type='submit'>Logout</Nav.Link>{/* <Nav.Link onClick={handlelogout} style={{ 'color': "white" }} href='/' type='submit'>Logout</Nav.Link> */}<NavDropdown style={{ 'color': "white" }} title="Your account" id="navbarScrollingDropdown">
-              <NavDropdown.Item href="#action3">Stored News</NavDropdown.Item>
+              <NavDropdown.Item href={storedhref}>Stored News</NavDropdown.Item>
               <NavDropdown.Item href={historyhref}>
                 History
               </NavDropdown.Item>

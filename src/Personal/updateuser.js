@@ -35,7 +35,7 @@ function Updateuser(props) {
       };
 
       try {
-        const res = await fetch("http://localhost:8080/api/update/"+name, {
+        const res = await fetch("http://newsbackend.us-west-2.elasticbeanstalk.com/api/update/"+name, {
           method: "put",
           headers: {
             "Content-Type": "application/json",
