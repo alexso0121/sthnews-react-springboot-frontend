@@ -34,7 +34,7 @@ async function deleteDataByuser() {
     
     if (id){
           
-        const res = await fetch("http://newsbackend.us-west-2.elasticbeanstalk.com/deleteallstore/"+id, { method: "DELETE" });
+        const res = await fetch("https://newsweb.us-west-2.elasticbeanstalk.com/deleteallstore/"+id, { method: "DELETE" });
     
         const data = await res.text();
     

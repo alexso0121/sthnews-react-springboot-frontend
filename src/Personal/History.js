@@ -12,7 +12,7 @@ function History() {
     const [newsid,setNewsid]=useState(null)
     
           useEffect(()=>{
-         Axios.get("http://newsbackend.us-west-2.elasticbeanstalk.com/gethistory/"+id).then((res)=>{
+         Axios.get("https://newsweb.us-west-2.elasticbeanstalk.com/"+id).then((res)=>{
             console.log(res.data)
             setData(res.data);
           

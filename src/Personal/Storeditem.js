@@ -13,7 +13,7 @@ const Historyitem=({title,news_id,edit,id})=>{
     
         if (id){
           
-            const res = await fetch("http://newsbackend.us-west-2.elasticbeanstalk.com/deletestore/"+id, { method: "DELETE" });
+            const res = await fetch("https://newsweb.us-west-2.elasticbeanstalk.com/deletestore/"+id, { method: "DELETE" });
     
             const data = await res.text();
     

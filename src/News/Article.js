@@ -50,7 +50,7 @@ import { SplitButton } from "react-bootstrap"
                            };
                 console.log(Stored);
         
-                fetch('http://newsbackend.us-west-2.elasticbeanstalk.com/addstore',{
+                fetch('https://newsweb.us-west-2.elasticbeanstalk.com/addstore',{
                     method:'POST',
                     headers:{"Content-Type":"application/json"},
                     body:JSON.stringify(Stored)
