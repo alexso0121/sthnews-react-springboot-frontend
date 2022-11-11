@@ -12,8 +12,8 @@ const Historyitem=({title,news_id,edit,id})=>{
        
     
         if (id){
-          
-            const res = await fetch("https://newsweb.us-west-2.elasticbeanstalk.com/deletestore/"+id, { method: "DELETE" });
+          //https://newsweb.us-west-2.elasticbeanstalk.com/
+            const res = await fetch("http://localhost:8080/deletestore/"+id, { method: "DELETE" });
     
             const data = await res.text();
     
@@ -40,7 +40,7 @@ const Historyitem=({title,news_id,edit,id})=>{
     
 
     return (<><ListGroup.Item><a href={href}>{title}</a>
-    {edit===true&&<Button style={{"float":"right","border-radius":"40%","height":"35px"}} onClick={deletestore}  variant="warning">-</Button>}
+    {edit===true&&<div><Button style={{"float":"right","border-radius":"40%","height":"35px"}} onClick={deletestore}  variant="warning">-</Button></div>}
     </ListGroup.Item></>)
 
 }

@@ -10,9 +10,9 @@ function History() {
     const [isloading,setIsloading]=useState(true)
     const [data,setData]=useState([])
     const [newsid,setNewsid]=useState(null)
-    
+    //https://newsweb.us-west-2.elasticbeanstalk.com
           useEffect(()=>{
-         Axios.get("https://newsweb.us-west-2.elasticbeanstalk.com/"+id).then((res)=>{
+         Axios.get("http://localhost:8080/gethistory/"+id).then((res)=>{
             console.log(res.data)
             setData(res.data);
           
@@ -24,13 +24,13 @@ function History() {
         
      
      
-    return ( <div><div style={{"display":"block","text-align":"center","marginTop":"5%","marginBottom":"5%"}}><h2 ><strong>Search History</strong></h2></div><ListGroup>
-        {data?.map(({title,user_id,id,url})=>(
+    return ( <div style={{"height":"1000px"}}><div style={{"display":"block","text-align":"center","marginTop":"5%","marginBottom":"5%"}}><h2 ><strong>Search History</strong></h2></div><ListGroup>
+        {data?.map(({title,user_id,news_id,url})=>(
         <Historyitem
         title={title} 
         user_id={user_id} 
         url={url} 
-        id={id} /> 
+        news_id={news_id} /> 
     ))}</ListGroup></div> )
 }
 

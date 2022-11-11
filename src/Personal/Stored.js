@@ -5,6 +5,7 @@ import Historyitem from "./Historyitem";
 import ListGroup from 'react-bootstrap/ListGroup'
 import Storeditem from "./Storeditem";
 import Button from 'react-bootstrap/Button';
+import Spinner from 'react-bootstrap/Spinner';
 
 function Stored() {
     let {id}=useParams()
@@ -23,7 +24,7 @@ function Stored() {
             
             
           
-          setIsloading(false);
+          /* setIsloading(false) */;
           
 })},[])
           
@@ -63,11 +64,13 @@ function edit(){
         
      
      
-    return (<div>{isloading===true&&<h1>Loading Stored News</h1>}
+    return (<>{isloading === true ? <div className='loading'><h1><strong>Loading Stored News<br/><br/> 
+    <Spinner animation="border" /></strong></h1></div> :
+    <div style={{"height":"1000px"}}>{/* {isloading===true&&<h1>Loading Stored News</h1>} */}
     <div style={{"display":"block","textAlign":"center","marginTop":"5%","marginBottom":"5%"}}>
         <h2 ><strong>{data.length} lines of stored News</strong></h2>
         </div><div>
-            <Button  style={{"marginBottom":"5px"}}  onClick={()=>edit()} variant="warning">Edit</Button>
+            { data.length!==0&&<Button  style={{"marginBottom":"5px","marginLeft":"3px"}}  onClick={()=>edit()} variant="warning">Edit</Button>}
             {isedit===true&&<Button onClick={deleteall} style={{"marginBottom":"5px","marginLeft":"5px"}} variant="warning">Delete all</Button>}
             </div>
     <ListGroup >
@@ -78,7 +81,7 @@ function edit(){
         id={id}
         news_id={news_id}
         user_id={user_id} /> 
-    ))}</ListGroup></div> )
+    ))}</ListGroup></div>}</> )
 }
 
 export default Stored;

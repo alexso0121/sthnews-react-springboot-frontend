@@ -1,0 +1,31 @@
+.article{
+    margin-top: 2px;
+    padding: 5px;
+    margin-left: 22%;
+    margin-right: 22%;
+}
+
+.picture{
+    width:100%;
+    
+}
+.toast{
+    margin-top: 22%;
+    
+    
+
+}
+
+@media screen and (max-width:500px) {
+    .article{
+        margin-left: 0%;
+        margin-right: 0%;
+    }
+    .picture{
+        width: 99%;
+    }
+    .contentth{
+        font-size: 15px;
+    }
+    
+}

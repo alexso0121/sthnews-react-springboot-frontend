@@ -1,9 +1,15 @@
-    import { useState } from "react"
+import { useState } from "react"
 import { SplitButton } from "react-bootstrap"
-    import { useNavigate, useParams } from "react-router-dom"
-    import Button from 'react-bootstrap/Button';
-    
-    function Article () {
+import { useNavigate, useParams } from "react-router-dom"
+import Button from 'react-bootstrap/Button';
+import "./Article.css"
+import Toast from 'react-bootstrap/Toast';
+import ToastContainer from 'react-bootstrap/ToastContainer';   
+import Col from 'react-bootstrap/Col';
+import Row from 'react-bootstrap/Row';
+import Spinner from 'react-bootstrap/Spinner';
+
+function Article () {
     const { id }=useParams()
     console.log(id)
     const navigate=useNavigate
@@ -15,6 +21,8 @@ import { SplitButton } from "react-bootstrap"
     const [date,setDate]=useState([])
     const [url,setUrl]=useState([])
     const userid=localStorage.getItem("userid")
+    const [show, setShow] = useState(false);
+    const [isloading,setIsloading]=useState(true)
     
     
     
@@ -23,7 +31,8 @@ import { SplitButton } from "react-bootstrap"
         (res=>{return res.json()}).then((jsonData)=>{
         setTitle(jsonData.title)
         setDescription(jsonData.description);setImage(jsonData.image)
-        setContent(jsonData.content);setDate(jsonData.date);setUrl(jsonData.url)} )
+        setContent(jsonData.content);setDate(jsonData.date);setUrl(jsonData.url)
+        setIsloading(false)} )
        
      
     function islive(){
@@ -48,9 +57,11 @@ import { SplitButton } from "react-bootstrap"
                                 "title":title,
                             
                            };
+                window.scrollTo({top:0,left:0,behaviour:'smooth'})
                 console.log(Stored);
-        
-                fetch('https://newsweb.us-west-2.elasticbeanstalk.com/addstore',{
+                setShow(true)
+                //https://newsweb.us-west-2.elasticbeanstalk.com
+                fetch('http://localhost:8080/addstore',{
                     method:'POST',
                     headers:{"Content-Type":"application/json"},
                     body:JSON.stringify(Stored)
@@ -60,20 +71,36 @@ import { SplitButton } from "react-bootstrap"
                     
                     
                 }).then((result=>{
+                   
                    //alert
                     
                 }))}
     
     
-    return ( /*  */
+    return ( 
+       
         
-       <><div style={{ "padding": "5px" }}>{islive}
-            <h3>{title}</h3>
-            <img style={{"width":"auto"}} src={image}></img>
-            <p>{date}</p>
-            <p><strong>{description}</strong></p>
-            <p style={{ "lineHeight": "300%" }}>{content}</p>
+       <><> {isloading === true ? <div className='loading'><h1><strong>Loading News<br/><br/> 
+       <Spinner animation="border" /></strong></h1></div> :
+       <><div className="article" /* style={{ "padding": "5px" }} */>{islive}
+        <div /* style={{"textAlign":"center","margin":"0%"}} */> <h2 style={{ "marginTop": "20px", "marginBottom": "20px" }}><strong>{title}</strong></h2>
+               
+                <img className="picture" /* style={{"width":"500px"}} */ src={image}></img></div>
+                <div ><p className="contentth">{date}</p>
+                <p><strong>{description}</strong></p>
+                <p className="contentth" style={{ "lineHeight": "300%" }}>{content}</p></div>
 
-            <a  href={url}>go bbc news</a></div><Button onClick={handlestored} variant="warning">Stored as Favorite</Button></>
-     );}
+                <div><Button onClick={handlestored} variant="warning">Stored as Favorite</Button></div>
+                <br /><a href={url}>go to bbc news</a></div><ToastContainer className="p-3" position="top-start" style={{ "width": "1000px", "color": "white", "margin-right": "0%" }}>
+
+                    <Toast onClose={() => setShow(false)} show={show} delay={3000} /* bg="success" */ style={{ "marginTop": "25px" }} autohide>
+
+                        <Toast.Header>
+
+                            <strong className="me-auto">You have stored the news !</strong>
+
+                        </Toast.Header>
+                    </Toast>
+                </ToastContainer></>}</></>
+     )}
     export default Article;

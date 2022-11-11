@@ -13,6 +13,8 @@ import Updateuser from './Personal/updateuser';
 import Article from './News/Article';
 import History from './Personal/History';
 import Stored from './Personal/Stored';
+import Buttom from './layout/buttom';
+
 import { AuthProvider, Usercontext } from './Usercontext';
 
 
@@ -54,7 +56,7 @@ const alex='alex'
      
     
       <Route path="/" element={<App />} />
-      <Route path="/" element={<App />} />
+      <Route path="/:id" element={<App />} />
       
       <Route path="/login" element={<Login   /* login={login } */ /* handleusername={(name)=>{username=name;console.log("username: "+username)}} */ />}/>
       <Route path="/register" element={<Register /* login={login } handleusername={(name)=>{username=name;console.log("username: "+username)}} *//>}/>
@@ -65,7 +67,7 @@ const alex='alex'
       <Route path="/stored/:id/get" element={<Stored  />}/>
       
       </Routes>
-    
+    <Buttom />
     </BrowserRouter>
   )
 } 

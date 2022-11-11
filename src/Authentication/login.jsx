@@ -7,6 +7,9 @@ import { useEffect } from 'react';
 import Axios  from 'axios';
 import { useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
+import Toast from 'react-bootstrap/Toast';
+import ToastContainer from 'react-bootstrap/ToastContainer';
+import Alert from 'react-bootstrap/Alert';
 import { useAuth, Usercontext } from '../Usercontext';
 import { useContext } from 'react';
 
@@ -20,6 +23,7 @@ import { useContext } from 'react';
     const [user,setUser]=useState('')
     const auth=useAuth()
   console.log(userStatus) */
+  const [pwtoast,setPwtoast]=useState(false)
     const [password,setPassword]=useState("null");
     const [readytosubmit,setReadytosubmit]=useState(false)
     const [ablelogin,setAblelogin]=useState(false)
@@ -31,17 +35,22 @@ import { useContext } from 'react';
     console.log(nameRef.current.value)
     
 
+
   function handlesubmit(e){
     e.preventDefault();
-    getPassword(e);
+    if(nameRef.current.value==''){
+        setPwtoast(true)
+    }else{
+    getPassword(e);}
     //e.target.reset();
    
 }
 
 const getPassword = async (e) => {
-        
-    const res = await Axios.get("https://newsweb.us-west-2.elasticbeanstalk.com/api/User/"+nameRef.current.value);
+    //https://newsweb.us-west-2.elasticbeanstalk.com
+    const res = await Axios.get("http://localhost:8080/api/User/"+nameRef.current.value);
     console.log(res.data.password)
+    
     if(passwordRef.current.value===res.data.password){
         console.log("Ture Password");
         console.log(nameRef.current.value)
@@ -49,12 +58,18 @@ const getPassword = async (e) => {
         localStorage.setItem('userid',res.data.id)
         localStorage.setItem('name',nameRef.current.value)
         localStorage.setItem('loginstatus',true);
+        localStorage.setItem("greeting",true)
+       
         
         navigate('/');
-        window.location.reload()
+        //window.location.reload();
+        
+        
+
 
     }else{
         console.log("false password")
+        setPwtoast(true)
         e.target.reset();
     }
 };
@@ -65,7 +80,10 @@ const getPassword = async (e) => {
     
     
     return (
-        <><div className='Registerform'>
+            
+        <><div style={{"height":"1000px"}}><div className='Registerform'>
+
+          
             <h3>Login Form</h3><br></br>
             <Form onSubmit=/* {handlesubmit} */{handlesubmit} >
                 <Form.Group className="mb-3" controlId="formBasicName">
@@ -86,9 +104,21 @@ const getPassword = async (e) => {
 
                 <Button variant="primary" type="submit">
                     Submit
-                </Button>
+                </Button><br/><br/>
+                <a href='/register'>Don't have an account?</a>
             </Form>
-            </div>
+            </div></div>
+            <ToastContainer className="p-3" position="top-start" style={{ "width": "1000px", "color": "white", "margin-right": "0%" }}>
+
+      <Toast onClose={() => setPwtoast(false)} show={pwtoast} delay={3000} bg="danger"  style={{ "marginTop": "25px"/* ,"marginRight":"20%","marginLeft":"20%","padding ":"0px" */ }} autohide>
+
+        <Toast.Header>
+
+          <strong className="me-auto">Wrong password or Username</strong>
+
+        </Toast.Header>
+      </Toast>
+    </ToastContainer>
              </>) }//<--- this works fine <Link
         //to={{pathname:'/layout',state:loginStatus}} />*/)}
     

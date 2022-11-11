@@ -1,0 +1,42 @@
+.header{
+    text-align: center;
+}
+
+.whole_info{
+    display: block;
+    margin-top: 50px;
+    margin-right: 30%;
+    margin-left: 30%;
+    /* background-color: rgb(250, 231, 250); */
+    padding: 20px;
+    border-radius: 25px;
+    /* border:5px solid rgb(244, 233, 250); */
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    color: rgb(44, 44, 63);}
+
+.infotext{
+    font-size: 20px;
+}
+
+.info_pict{
+    height: 100%;
+    width:100%;
+    margin-right: 30%;
+    margin-left: 0%;
+}
+
+@media screen and (max-width:500px) {
+    .whole_info{
+        margin-top: 30px;
+        margin-left: 0%;
+        margin-right: 0%;
+        padding: 1%;
+    }
+    .info_pict{
+        height: 250px;
+        width:200px;
+        margin-right: 0%;
+        margin-left: 22%;
+    }
+    
+}

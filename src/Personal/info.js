@@ -2,6 +2,7 @@ import Axios  from "axios";
 import { useState } from "react";
 import { Button } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
+import "./info.css"
 
 function Info() {
     const username=localStorage.getItem('name')
@@ -11,9 +12,9 @@ function Info() {
     const [useremail,setUseremail]=useState([])
     const [userstatus,setUserstatus]=useState([])
     const navigate=useNavigate();
-    
+    /* https://newsweb.us-west-2.elasticbeanstalk.com/ */
 
-    fetch("https://newsweb.us-west-2.elasticbeanstalk.com/"+username).then
+    fetch("http://localhost:8080/api/User/"+username).then
         (res=>{return res.json()}).then((jsonData)=>{
         setUserid(jsonData.id)
         setUserpw(jsonData.password);setUseremail(jsonData.email)
@@ -26,17 +27,18 @@ function Info() {
         navigate("/updateuser")
 
     }
-    return ( <div>
-       <h1>User info</h1> 
+    return ( <div style={{"height":"1000px"}}><div className='whole_info' >
+       <h1 className="header">User info</h1><br/>
         <div>
-             <h3>id :{userid}</h3> 
-            <h3>Name :{username}</h3>
-            <h3>Password :{userpw}</h3>
-            <h3>Email :{useremail}</h3>
-            <h3>Status :{userstatus}</h3>
+            <img className="info_pict" src="https://icon-library.com/images/profile01-roundedblack-512.png"/>
+             <p className="infotext">id :{userid}</p> 
+            <p className="infotext">Name :{username}</p>
+            <p className="infotext">Password :{userpw}</p>
+            <p className="infotext">Email :{useremail}</p>
+            <p className="infotext">Status :{userstatus}</p>
         </div>
-        <Button onClick={handleedit} variant="secondary">Edit</Button>{' '}
-    </div> );
+       {/*  <Button onClick={handleedit} variant="primary">Edit</Button>{' '} */}
+    </div> </div>);
 }
 
 export default Info;
