@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { SplitButton } from "react-bootstrap"
 import { useNavigate, useParams } from "react-router-dom"
 import Button from 'react-bootstrap/Button';
@@ -11,7 +11,7 @@ import Spinner from 'react-bootstrap/Spinner';
 
 function Article () {
     const { id }=useParams()
-    console.log(id)
+    //console.log(id)
     const navigate=useNavigate
     const [title,setTitle]=useState([])
     //const [name,setUsername]=useState([])
@@ -27,12 +27,12 @@ function Article () {
     
     
 
-     fetch("http://localhost:8080/getnews/"+id).then
+    useEffect(()=> {fetch("http://localhost:8080/getnews/"+id).then
         (res=>{return res.json()}).then((jsonData)=>{
         setTitle(jsonData.title)
         setDescription(jsonData.description);setImage(jsonData.image)
-        setContent(jsonData.content);setDate(jsonData.date);setUrl(jsonData.url)
-        setIsloading(false)} )
+        setContent(jsonData.content.split("/n/"));setDate(jsonData.date);setUrl(jsonData.url)
+        setIsloading(false)} )},[])
        
      
     function islive(){
@@ -88,7 +88,7 @@ function Article () {
                 <img className="picture" /* style={{"width":"500px"}} */ src={image}></img></div>
                 <div ><p className="contentth">{date}</p>
                 <p><strong>{description}</strong></p>
-                <p className="contentth" style={{ "lineHeight": "300%" }}>{content}</p></div>
+                {content.map(block=>(<p className="contentth" style={{ "lineHeight": "200%" }}>{block}</p>))}</div>
 
                 <div><Button onClick={handlestored} variant="warning">Stored as Favorite</Button></div>
                 <br /><a href={url}>go to bbc news</a></div><ToastContainer className="p-3" position="top-start" style={{ "width": "1000px", "color": "white", "margin-right": "0%" }}>

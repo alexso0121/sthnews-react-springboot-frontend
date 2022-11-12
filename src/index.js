@@ -14,7 +14,7 @@ import Article from './News/Article';
 import History from './Personal/History';
 import Stored from './Personal/Stored';
 import Buttom from './layout/buttom';
-
+import Try from './News/try'
 import { AuthProvider, Usercontext } from './Usercontext';
 
 
@@ -65,6 +65,8 @@ const alex='alex'
       <Route path="/article/:id/get" element={<Article  />}/>
       <Route path="/history/:id/get" element={<History  />}/>
       <Route path="/stored/:id/get" element={<Stored  />}/>
+      <Route path="/try" element={<Try  />}/>
+      
       
       </Routes>
     <Buttom />

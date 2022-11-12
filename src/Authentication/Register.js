@@ -1,7 +1,7 @@
 import Form from 'react-bootstrap/Form';
 import { Button } from 'react-bootstrap';
 import './Auth.css'
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import axios from 'axios';
 import qs from 'qs';
 import { propTypes } from 'react-bootstrap/esm/Image';
@@ -20,7 +20,15 @@ function Register(props) {
   const [passwordsnot,setPasswordsnot]=useState(false)
   const [validpw,setValidpw]=useState(false)
   const [emptyinput,setEmptyinput]=useState(false)
+  const [wrongclick,setWrongclick]=useState(false)
 
+
+  useEffect(()=>{
+    if(localStorage.getItem("clickregister")){
+      setWrongclick(true)
+      localStorage.removeItem("clickregister")
+    }
+  },[])
   function valid(e){
     if(name==''||email==''||password1==''){
       //setEmail('');setName('');setPassword1('');setPassword2('');
@@ -144,7 +152,8 @@ function Register(props) {
 
         <Button variant="primary" type="submit">
           Submit
-        </Button>
+        </Button><br/><br/>
+        <a href='/login'>already have an account?</a>
       </Form></div></div><ToastContainer className="p-3" position="top-start" style={{ "width": "1000px", "color": "white", "margin-right": "0%" }}>
 
 <Toast onClose={() => setEmptyinput(false)} show={emptyinput} delay={3000} bg="danger" style={{ "marginTop": "25px" /* ,"marginRight":"20%","marginLeft":"20%","padding ":"0px" */ }} autohide>
@@ -172,6 +181,16 @@ function Register(props) {
   <Toast.Header>
 
     <strong className="me-auto">The username has already in use</strong>
+
+  </Toast.Header>
+</Toast>
+</ToastContainer><ToastContainer className="p-3" position="top-start" style={{ "width": "1000px", "color": "white", "margin-right": "0%" }}>
+
+<Toast onClose={() => setWrongclick(false)} show={wrongclick} delay={3000} bg="danger" style={{ "marginTop": "25px" /* ,"marginRight":"20%","marginLeft":"20%","padding ":"0px" */ }} autohide>
+
+  <Toast.Header>
+
+    <strong className="me-auto">Please Register before continue !</strong>
 
   </Toast.Header>
 </Toast>

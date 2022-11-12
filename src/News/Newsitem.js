@@ -23,7 +23,9 @@ const NewsItem=({title,url,image,id,date,category})=>{
     
     function sendarticle(){
             if(!localStorage.getItem("loginstatus")){
-                navigate("/login")
+                localStorage.setItem("clickregister",true)
+                navigate("/register")
+                
                 
             }else{
         
