@@ -37,7 +37,7 @@ const NewsItem=({title,url,image,id,date,category})=>{
                         "title":title};
             console.log(user);
     //newsweb.us-west-2.elasticbeanstalk.com
-            fetch('http://localhost:8080/clicknews',{
+            fetch('https://newsweb.us-west-2.elasticbeanstalk.com/clicknews',{
                 method:'POST',
                 headers:{"Content-Type":"application/json"},
                 body:JSON.stringify(user)

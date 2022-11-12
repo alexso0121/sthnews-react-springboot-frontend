@@ -17,7 +17,7 @@ function Stored() {
     
     
           useEffect(()=>{
-         Axios.get("http://localhost:8080/getstore/"+id).then((res)=>{
+         Axios.get("https://newsweb.us-west-2.elasticbeanstalk.com/getstore/"+id).then((res)=>{
             console.log(res.data)
             setData(res.data);
             setIsloading(false);
