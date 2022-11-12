@@ -89,7 +89,7 @@ const App=()=>{
       
       const getArticles = async () => {
         
-        const res = await Axios.get("https://newsweb.us-west-2.elasticbeanstalk.com/shownews"+newsurl);
+        const res = await Axios.get("http://34.218.54.74/shownews"+newsurl);
         console.log(res)
         setActicles(res.data);
         setIsloading(false);

@@ -15,6 +15,7 @@ import History from './Personal/History';
 import Stored from './Personal/Stored';
 import Buttom from './layout/buttom';
 import Try from './News/try'
+import Weather from './Weathering/weather'
 import { AuthProvider, Usercontext } from './Usercontext';
 
 
@@ -66,6 +67,7 @@ const alex='alex'
       <Route path="/history/:id/get" element={<History  />}/>
       <Route path="/stored/:id/get" element={<Stored  />}/>
       <Route path="/try" element={<Try  />}/>
+      <Route path="/weather" element={<Weather />}/>
       
       
       </Routes>

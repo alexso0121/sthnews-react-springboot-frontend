@@ -1,0 +1,25 @@
+.weatherwhole{
+    margin-top: 80px;
+    margin-left: 22%;
+    margin-right: 22%;
+    height:1000px;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    display:block
+}
+.weathertitle{
+    text-align: center;
+
+}
+.generalSituation{
+    margin-top: 15px;
+    font-size: 15px;
+}
+
+@media screen and (max-width:500px) {
+    .weatherwhole{
+        margin-left:0% ;
+        margin-right: 0%;
+        padding:3px;
+        margin-top: 10px;
+    }
+}
