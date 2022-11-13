@@ -7,6 +7,7 @@ import Weatheritem from './weatheritem'
 function Weather() {
     const [data,setData]=useState([]);
     const [generalSituation,setGeneralSituation]=useState([]);
+//ns-542.awsdns-03.net
 
     useEffect(()=>{
         Axios.get("https://data.weather.gov.hk/weatherAPI/opendata/weather.php?dataType=fnd&lang=en").then((res)=>{
