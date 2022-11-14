@@ -66,8 +66,8 @@ function Layout(props){
                   Personal infomation
                 </NavDropdown.Item>
               </NavDropdown></> :
-              <><Nav.Link style={{ 'color': "white" }} href="/login">Login</Nav.Link>
-                <Nav.Link style={{ 'color': "white" }} href="/register">New Register</Nav.Link></>}
+              <><Nav.Link style={{ "fontFamily": "Georgia ",'color': "white" }} href="/login">Login</Nav.Link>
+                <Nav.Link style={{ "fontFamily": "Georgia ",'color': "white" }} href="/register">New Register</Nav.Link></>}
                 <Nav.Link style={{ "fontFamily": "Georgia ",'color': "white" }} href="/weather">Weather Forecast</Nav.Link>
 
 

@@ -55,7 +55,7 @@ function Article () {
 
                 if(!localStorage.getItem("loginstatus")){
                     setShowM(true);
-                    console.log("havent login")
+                    console.log("havent login");
 
                 }else{
                 const Stored={"user_id":userid,

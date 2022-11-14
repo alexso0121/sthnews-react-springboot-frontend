@@ -55,7 +55,7 @@ const NewsItem=({title,url,image,id,date,category})=>{
     return(
     <Card className="wholecard">
       <><Card.Img /* style={{"height":"380px"}} */ variant="top" src={image}/><Card.Body>
-            <a href="#" style={{"textDecoration":"none"}} onClick={()=>sendarticle()}><h3>{title}</h3></a>
+            <a href="#" style={{"textDecoration":"none","color":"black"}} onClick={()=>sendarticle()}><h3>{title}</h3></a>
             
         </Card.Body><ListGroup className="list-group-flush">
                 {category!==0&&<ListGroup.Item>category: {cat}</ListGroup.Item>}
