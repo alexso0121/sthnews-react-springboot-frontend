@@ -27,9 +27,9 @@ function History() {
      
     return ( <div className="wholebody" /* style={{"height":"1000px"}} */>
         <div className="wholelayout" /* style={{"display":"block","text-align":"center","marginTop":"5%","marginBottom":"5%"}} */><h2 >
-            <strong>Search History</strong></h2></div><ListGroup>
+            <strong>Search History</strong></h2></div><ListGroup className="listgroup"> 
         {data?.map(({title,user_id,news_id,url})=>(
-        <Historyitem
+        <Historyitem 
         title={title} 
         user_id={user_id} 
         url={url} 
