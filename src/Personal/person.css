@@ -9,6 +9,10 @@
         margin-left: 25%;
         margin-right: 25%;
 }
+.listgroup{
+    margin-left: 25%;
+    margin-right: 25%;
+}
 
 
 @media screen and (max-width:500px) {
@@ -17,5 +21,9 @@
         margin-bottom: 5%;
         margin-right: 3px;
         margin-left: 3px;
+    }
+    .listgroup{
+        margin-left: 3px;
+        margin-right: 3px;
     }
 }
