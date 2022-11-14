@@ -46,11 +46,12 @@ import { useContext } from 'react';
     //e.target.reset();
    
 }
-
+//https://sthbackend.com/api/password/alex
 const getPassword = async (e) => {
     //https://newsweb.us-west-2.elasticbeanstalk.com
     const res = await Axios.get("https://sthbackend.com/api/password/"+nameRef.current.value);
     console.log(res.data.password)
+    console.log(res)
     
     if(passwordRef.current.value===res.data.password){
         console.log("Ture Password");

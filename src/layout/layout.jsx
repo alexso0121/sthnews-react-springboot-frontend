@@ -51,18 +51,18 @@ function Layout(props){
             className="me-auto my-2 my-lg-0"
             navbarScroll
           >
-            <Nav.Link style={{ 'color': "white" }} href="/">Home</Nav.Link>
+            <Nav.Link style={{ "fontFamily": "Georgia ",'color': "white" }} href="/">Home</Nav.Link>
 
             {userStatus === 'true' ?
-              <><Nav.Link onClick={logout} style={{ 'color': "white" }} href='/' type='submit'>Logout</Nav.Link>
-              <NavDropdown style={{ 'color': "white" }} title="Your account" id="navbarScrollingDropdown">
-                <NavDropdown.Item href={storedhref}>Stored News</NavDropdown.Item>
+              <><Nav.Link onClick={logout} style={{ "fontFamily": "Georgia ",'color': "white" }} href='/' type='submit'>Logout</Nav.Link>
+              <NavDropdown style={{ "fontFamily": "Georgia ",'color': "white" }} title="Your account" id="navbarScrollingDropdown">
+                <NavDropdown.Item style={{"fontFamily": "Georgia "}} href={storedhref}>Stored News</NavDropdown.Item>
                 <NavDropdown.Divider />
-                <NavDropdown.Item href={historyhref}>
+                <NavDropdown.Item style={{"fontFamily": "Georgia "}} href={historyhref}>
                   History
                 </NavDropdown.Item>
                 <NavDropdown.Divider />
-                <NavDropdown.Item href="/info">
+                <NavDropdown.Item style={{"fontFamily": "Georgia "}} href="/info">
                   Personal infomation
                 </NavDropdown.Item>
               </NavDropdown></> :
