@@ -34,6 +34,7 @@ const Historyitem=({title,news_id,edit,id})=>{
         deleteDataById();
         
         window.location.reload();
+        window.location.reload();
 
 
       }

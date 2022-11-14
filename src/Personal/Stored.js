@@ -51,7 +51,8 @@ async function deleteDataByuser() {
       }
 function deleteall(){
     deleteDataByuser()
-    window.location.reload()
+    window.location.reload();
+    window.location.reload();
 }
 
 function edit(){
