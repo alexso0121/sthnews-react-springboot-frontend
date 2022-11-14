@@ -53,7 +53,7 @@ const getPassword = async (e) => {
     console.log('res.data'+res.data)
     console.log(res)
     
-    if(passwordRef.current.value===res.data){
+    if(passwordRef.current.value===res.data.password){
         console.log("Ture Password");
         console.log(nameRef.current.value)
         console.log(res.data.id)
@@ -61,14 +61,14 @@ const getPassword = async (e) => {
         localStorage.setItem('name',nameRef.current.value)
         localStorage.setItem('loginstatus',true);
         localStorage.setItem("greeting",true);
-        if(newsclicked){navigate('/article/'+newsclicked+"/get/");
+        /* if(newsclicked){navigate('/article/'+newsclicked+"/get/");
         localStorage.removeItem("clickregister");
         window.location.reload();
-        }else{
+        }else{ */
        
         
         navigate('/');
-        window.location.reload();}
+        window.location.reload();
         //window.location.reload();
         
         

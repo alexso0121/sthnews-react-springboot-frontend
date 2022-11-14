@@ -88,12 +88,12 @@ function Register(props) {
           console.log(JsonData.id)
           localStorage.setItem('userid',JsonData.id)
           localStorage.setItem("greeting",true)
-          if(newsclicked){navigate('/article/'+newsclicked+"/get/");
+          /* if(newsclicked){navigate('/article/'+newsclicked+"/get/");
           localStorage.removeItem("clickregister");
           window.location.reload();
-        }else{
+        }else{ */
             navigate('/')
-            window.location.reload();}
+            window.location.reload();
           }else{e.target.reset();setValidpw(true)}
           /*  */
         })}}

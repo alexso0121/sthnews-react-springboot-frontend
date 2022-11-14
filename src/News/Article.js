@@ -8,6 +8,7 @@ import ToastContainer from 'react-bootstrap/ToastContainer';
 import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
 import Spinner from 'react-bootstrap/Spinner';
+import Modal from 'react-bootstrap/Modal';
 
 function Article () {
     const { id }=useParams()
@@ -23,6 +24,7 @@ function Article () {
     const userid=localStorage.getItem("userid")
     const [show, setShow] = useState(false);
     const [isloading,setIsloading]=useState(true)
+    const [showM, setShowM] = useState(false);
     
     
     
@@ -51,7 +53,11 @@ function Article () {
     }
     function handlestored(){
 
+                if(!localStorage.getItem("loginstatus")){
+                    setShowM(true);
+                    console.log("havent login")
 
+                }else{
                 const Stored={"user_id":userid,
                                 "news_id":id,
                                 "title":title,
@@ -74,7 +80,7 @@ function Article () {
                    
                    //alert
                     
-                }))}
+                }))}}
     
     
     return ( 
@@ -101,6 +107,26 @@ function Article () {
 
                         </Toast.Header>
                     </Toast>
-                </ToastContainer></>}</></>
+                </ToastContainer> 
+                 <Modal className='LargeModal' show={showM} onHide={()=>setShowM(false)} 
+      aria-labelledby="contained-modal-title-vcenter"
+      centered>
+        <Modal.Header >
+          <Modal.Title>Warning</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>Please login before using the store news function!
+        
+
+        </Modal.Body>
+        <Modal.Footer>
+        
+          <Button variant="primary" onClick={()=>setShowM(false)}>
+            <a href='/login' style={{"color":"white","textDecoration":"none"}}>login Now !</a>
+          </Button>
+          <Button onClick="#" variant="secondary" >
+           login later
+          </Button>
+        </Modal.Footer>
+      </Modal></>}</></>
      )}
     export default Article;

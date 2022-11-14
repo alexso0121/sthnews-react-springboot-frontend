@@ -4,16 +4,25 @@
     margin-right: 22%;
     height:1000px;
     font-family: 'Times New Roman', Times, serif;
-    display:block
+    display:block;
+    /* background-image:url("https://en.baaghitv.com/wp-content/uploads/2021/02/720dfa3f7a5e8f5c780f7affb30a71cb25088843-middle.jpeg") ;
+    object-fit: fill; */
+}
+body {
+    background-image:url("https://en.baaghitv.com/wp-content/uploads/2021/02/720dfa3f7a5e8f5c780f7affb30a71cb25088843.jpeg") ;  
+    background-repeat: no-repeat;
+    background-size: cover;
 }
 .weathertitle{
     text-align: center;
+    color: white;
 
 }
-.generalSituation{
+/* .generalSituation{
     margin-top: 15px;
     font-size: 15px;
-}
+    margin-left: 12px;
+} */
 
 @media screen and (max-width:500px) {
     .weatherwhole{

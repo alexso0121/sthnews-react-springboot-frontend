@@ -25,9 +25,9 @@ function Weather() {
     return ( <div className="weatherwhole">
         <div className="weathertitle">
             <h2><strong>Weather Report</strong></h2></div>
-    <div className="generalSituation">
-       <p><strong>General Situation of Hong Kong Weather:</strong><br/> {generalSituation}</p>
-       <ListGroup >
+    {/* <div className="generalSituation">
+       <p><strong>General Situation of Hong Kong Weather:</strong><br/> {generalSituation}</p></div> */}
+       <ListGroup style={{"marginTop":"20px"}} >
         {data.map(({week,forecastWeather,forecastMaxtemp,forecastMintemp,forecastWind})=>(
         <Weatheritem
         week={week}
@@ -36,7 +36,7 @@ function Weather() {
         forecastMintemp={forecastMintemp}
         forecastWind={forecastWind} /> 
     ))}</ListGroup>
-    </div></div> );
+    </div> );
 }
 
 export default Weather;
