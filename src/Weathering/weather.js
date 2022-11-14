@@ -27,16 +27,16 @@ function Weather() {
             <h2><strong>Weather Report</strong></h2></div> */}
     {/* <div className="generalSituation">
        <p><strong>General Situation of Hong Kong Weather:</strong><br/> {generalSituation}</p></div> */}
-       <ListGroup style={{"marginTop":"20px","textAlign":"start","padding":"8px"}} >
-        {data.map(({week,forecastWeather,forecastMaxtemp,forecastMintemp,ForecastIcon,forecastDate})=>(
-        <Weatheritem
+       <ListGroup  style={{"marginTop":"20px","textAlign":"start","padding":"8px"}} >
+        {data.map(({week,forecastWeather,forecastMaxtemp,forecastMintemp,ForecastIcon,forecastDate},idx)=>(
+        idx<8&&(<Weatheritem
         forecastDate={forecastDate}
         week={week}
         forecastWeather={forecastWeather} 
         forecastMaxtemp={forecastMaxtemp}
         forecastMintemp={forecastMintemp}
-        ForecastIcon={ForecastIcon} /> 
-    ))}</ListGroup><div style={{"marginTop":"10px","font-size":"5px"}}>@data are from <a href="https://www.hko.gov.hk/">https://www.hko.gov.hk/</a></div>
+        ForecastIcon={ForecastIcon} /> )
+    ))}</ListGroup><div style={{"marginTop":"10px","font-size":"5px"}}>@data are from <a style={{"color":"black"}} href="https://www.hko.gov.hk/">https://www.hko.gov.hk/</a></div>
     </div></div> );
 }
 

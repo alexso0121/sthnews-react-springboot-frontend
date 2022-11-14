@@ -11,7 +11,7 @@ function Weatheritem ({week,forecastWeather,forecastMaxtemp,forecastMintemp,Fore
 
    
     return ( <><ListGroup.Item><Container><Row>
-        <Col x style={{"marginTop":"10px"}} ><h3><strong>{week}</strong></h3></Col>
+        <Col x style={{"marginTop":"10px"}} ><h4><strong>{week}</strong></h4></Col>
         <Col></Col>
         <Col >
             {

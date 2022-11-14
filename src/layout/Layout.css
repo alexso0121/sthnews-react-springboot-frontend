@@ -13,7 +13,7 @@
 }
 .buttom_about{
     margin-top: 5%;
-   bottom:auto;
+   bottom:0px;
     background-color: gray;
     flex: 1;
     height: 10%;
@@ -45,7 +45,7 @@
     .typebox{
         color:white;
         /* text-align: center; */
-        padding: 10%;
+        /* padding: 10%; */
         font-size: 9px;
         
     }
