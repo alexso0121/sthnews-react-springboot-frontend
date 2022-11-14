@@ -89,7 +89,9 @@ function Register(props) {
           localStorage.setItem('userid',JsonData.id)
           localStorage.setItem("greeting",true)
           if(newsclicked){navigate('/article/'+newsclicked+"/get/");
-          localStorage.removeItem("clickregister");}else{
+          localStorage.removeItem("clickregister");
+          window.location.reload();
+        }else{
             navigate('/')
             window.location.reload();}
           }else{e.target.reset();setValidpw(true)}
