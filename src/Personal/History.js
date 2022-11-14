@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom";
 import Axios from "axios";
 import Historyitem from "./Historyitem";
 import ListGroup from 'react-bootstrap/ListGroup'
+import './person.css'
 
 function History() {
     let {id}=useParams()
@@ -24,7 +25,9 @@ function History() {
         
      
      
-    return ( <div style={{"height":"1000px"}}><div style={{"display":"block","text-align":"center","marginTop":"5%","marginBottom":"5%"}}><h2 ><strong>Search History</strong></h2></div><ListGroup>
+    return ( <div className="wholebody" /* style={{"height":"1000px"}} */>
+        <div className="wholelayout" /* style={{"display":"block","text-align":"center","marginTop":"5%","marginBottom":"5%"}} */><h2 >
+            <strong>Search History</strong></h2></div><ListGroup>
         {data?.map(({title,user_id,news_id,url})=>(
         <Historyitem
         title={title} 

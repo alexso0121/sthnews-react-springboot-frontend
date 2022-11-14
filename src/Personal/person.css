@@ -1,0 +1,21 @@
+.wholebody{height: 1000px;
+
+}
+.wholelayout{
+        display: block;
+        text-align: center;
+        margin-top: 50px;
+        margin-bottom: 5%;
+        margin-left: 25%;
+        margin-right: 25%;
+}
+
+
+@media screen and (max-width:500px) {
+    .wholelayout{
+        margin-top: 5%;
+        margin-bottom: 5%;
+        margin-right: 3px;
+        margin-left: 3px;
+    }
+}
