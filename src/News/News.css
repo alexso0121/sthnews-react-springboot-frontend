@@ -24,7 +24,8 @@
     .wholecard{
         margin-left: 0;
     margin-right:0;
-    height: 480px;
+    /* //height: 480px; */
+    height: 80%;
    
     }
     .card-body{

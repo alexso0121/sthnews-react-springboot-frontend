@@ -32,6 +32,7 @@ import { useContext } from 'react';
     const navigate=useNavigate();
     //var name=nameRef.current.value;
     const passwordRef=useRef("hfs");
+    const newsclicked=localStorage.getItem("clickregister")
     console.log(nameRef.current.value)
     
 
@@ -58,10 +59,13 @@ const getPassword = async (e) => {
         localStorage.setItem('userid',res.data.id)
         localStorage.setItem('name',nameRef.current.value)
         localStorage.setItem('loginstatus',true);
-        localStorage.setItem("greeting",true)
+        localStorage.setItem("greeting",true);
+        if(newsclicked){navigate('/article/'+newsclicked+"/get/");
+        localStorage.removeItem("clickregister");
+        }else{
        
         
-        navigate('/');
+        navigate('/');}
         //window.location.reload();
         
         

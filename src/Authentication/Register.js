@@ -21,12 +21,16 @@ function Register(props) {
   const [validpw,setValidpw]=useState(false)
   const [emptyinput,setEmptyinput]=useState(false)
   const [wrongclick,setWrongclick]=useState(false)
+  const newsclicked=localStorage.getItem("clickregister")
 
 
   useEffect(()=>{
+    
     if(localStorage.getItem("clickregister")){
       setWrongclick(true)
-      localStorage.removeItem("clickregister")
+      
+
+      //localStorage.removeItem("clickregister")
     }
   },[])
   function valid(e){
@@ -61,6 +65,7 @@ function Register(props) {
     var success;
     //verify
     e.preventDefault();
+    window.scrollTo({top:0,left:0,behaviour:'smooth'})
      if(valid(e)==false){
        console.log("wrong")
         
@@ -83,8 +88,10 @@ function Register(props) {
           console.log(JsonData.id)
           localStorage.setItem('userid',JsonData.id)
           localStorage.setItem("greeting",true)
+          if(newsclicked){navigate('/article/'+newsclicked+"/get/");
+          localStorage.removeItem("clickregister");}else{
             navigate('/')
-            window.location.reload();
+            window.location.reload();}
           }else{e.target.reset();setValidpw(true)}
           /*  */
         })}}
