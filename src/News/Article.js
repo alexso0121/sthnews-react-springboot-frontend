@@ -123,7 +123,7 @@ function Article () {
           <Button variant="primary" onClick={()=>{setShowM(false);localStorage.setItem("storedbeforereg",id)}}>
             <a href='/login' style={{"color":"white","textDecoration":"none"}}>login Now !</a>
           </Button>
-          <Button onClick="#" variant="secondary" >
+          <Button onClick={()=>setShowM(false)} variant="secondary" >
            login later
           </Button>
         </Modal.Footer>
