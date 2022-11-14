@@ -6,7 +6,11 @@ function Weatheritem ({week,forecastWeather,forecastMaxtemp,forecastMintemp,Fore
    /*  const [weatherimage,setweatherimage]=useState(null); */
    const baseimageurl="https://www.hko.gov.hk/images/HKOWxIconOutline/pic"
     console.log(ForecastIcon)
-    
+    var date=forecastDate;
+    var chr='-';
+    var pos1=4;
+    var pos2=6;
+    const new_date=[date.slice(0,pos1),chr,date.slice(pos1,pos2),chr,date.slice(pos2)]
       
 
    
@@ -42,7 +46,7 @@ function Weatheritem ({week,forecastWeather,forecastMaxtemp,forecastMintemp,Fore
             )()}</Col>
         </Row>
         </Container><br/>
-        <Row><Col style={{"marginLeft":"12px"}}>Date:  {forecastDate}</Col></Row>
+        <Row><Col style={{"marginLeft":"12px"}}>Date:  {new_date}</Col></Row>
         <Row><Col style={{"marginLeft":"12px"}}>  {forecastWeather}</Col></Row>
         <Row><Col style={{"marginLeft":"12px"}}>
               Estimated temperature: {forecastMintemp.value}{forecastMintemp.unit} - {forecastMaxtemp.value}{forecastMaxtemp.unit}</Col></Row>

@@ -7,6 +7,7 @@ import Weatheritem from './weatheritem'
 function Weather() {
     const [data,setData]=useState([]);
     const [generalSituation,setGeneralSituation]=useState([]);
+   
 //ns-542.awsdns-03.net
 
     useEffect(()=>{
@@ -15,6 +16,7 @@ function Weather() {
            setData(res.data.weatherForecast);
            console.log(res.data.weatherForecast)
            setGeneralSituation(res.data.generalSituation)
+           
            //setIsloading(false);
            //console.log(data)
            
