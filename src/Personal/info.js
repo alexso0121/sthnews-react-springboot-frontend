@@ -14,7 +14,7 @@ function Info() {
     const navigate=useNavigate();
     /* https://newsweb.us-west-2.elasticbeanstalk.com/ */
 
-    fetch("https://newsweb.us-west-2.elasticbeanstalk.com/api/User/"+username).then
+    fetch("https://sthbackend.com/api/User/"+username).then
         (res=>{return res.json()}).then((jsonData)=>{
         setUserid(jsonData.id)
         setUserpw(jsonData.password);setUseremail(jsonData.email)

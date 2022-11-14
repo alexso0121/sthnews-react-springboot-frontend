@@ -17,7 +17,7 @@ function Stored() {
     
     
           useEffect(()=>{
-         Axios.get("https://newsweb.us-west-2.elasticbeanstalk.com/getstore/"+id).then((res)=>{
+         Axios.get("https://sthbackend.com/getstore/"+id).then((res)=>{
             console.log(res.data)
             setData(res.data);
             setIsloading(false);
@@ -35,7 +35,7 @@ async function deleteDataByuser() {
     
     if (id){
           
-        const res = await fetch("https://newsweb.us-west-2.elasticbeanstalk.com/deleteallstore/"+id, { method: "DELETE" });
+        const res = await fetch("https://sthbackend.com/deleteallstore/"+id, { method: "DELETE" });
     
         const data = await res.text();
     

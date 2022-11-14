@@ -69,7 +69,7 @@ function Register(props) {
         const user={"name":name,"password":password1,"email":email,"status":"member"};
         console.log(user);
 //https://newsweb.us-west-2.elasticbeanstalk.com/api/addUser
-        fetch('https://newsweb.us-west-2.elasticbeanstalk.com/api/addUser',{
+        fetch('https://sthbackend.com/api/addUser',{
             method:'POST',
             headers:{"Content-Type":"application/json"},
             body:JSON.stringify(user)

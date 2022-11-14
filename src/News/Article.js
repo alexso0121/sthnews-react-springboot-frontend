@@ -61,7 +61,7 @@ function Article () {
                 console.log(Stored);
                 setShow(true)
                 //https://newsweb.us-west-2.elasticbeanstalk.com
-                fetch('https://newsweb.us-west-2.elasticbeanstalk.com/addstore',{
+                fetch('https://sthbackend.com/addstore',{
                     method:'POST',
                     headers:{"Content-Type":"application/json"},
                     body:JSON.stringify(Stored)
