@@ -73,14 +73,14 @@ function Article () {
                     body:JSON.stringify(Stored)
                 }).then((res)=>{
                     console.log("Stored a news");
-                    return res.json()
+                    /* return res.json()
                     
-                    
-                }).then((result=>{
+                     */
+                })/* .then((result=>{
                    
                    //alert
                     
-                }))}}
+                })) */}}
     
     
     return ( 
@@ -120,7 +120,7 @@ function Article () {
         </Modal.Body>
         <Modal.Footer>
         
-          <Button variant="primary" onClick={()=>setShowM(false)}>
+          <Button variant="primary" onClick={()=>{setShowM(false);localStorage.setItem("storedbeforereg",id)}}>
             <a href='/login' style={{"color":"white","textDecoration":"none"}}>login Now !</a>
           </Button>
           <Button onClick="#" variant="secondary" >

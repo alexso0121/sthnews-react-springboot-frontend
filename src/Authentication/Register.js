@@ -21,7 +21,7 @@ function Register(props) {
   const [validpw,setValidpw]=useState(false)
   const [emptyinput,setEmptyinput]=useState(false)
   const [wrongclick,setWrongclick]=useState(false)
-  const newsclicked=localStorage.getItem("clickregister")
+  const storedbeforereg=localStorage.getItem("storedbeforereg")
 
 
   useEffect(()=>{
@@ -88,12 +88,13 @@ function Register(props) {
           console.log(JsonData.id)
           localStorage.setItem('userid',JsonData.id)
           localStorage.setItem("greeting",true)
-          /* if(newsclicked){navigate('/article/'+newsclicked+"/get/");
-          localStorage.removeItem("clickregister");
+           if(storedbeforereg){navigate('/article/'+storedbeforereg+"/get/");
+           
+          localStorage.removeItem("storedbeforereg");
           window.location.reload();
-        }else{ */
+        }else{ 
             navigate('/')
-            window.location.reload();
+            window.location.reload();}
           }else{e.target.reset();setValidpw(true)}
           /*  */
         })}}
@@ -193,9 +194,9 @@ function Register(props) {
 
   </Toast.Header>
 </Toast>
-</ToastContainer><ToastContainer className="p-3" position="top-start" style={{ "width": "1000px", "color": "white", "margin-right": "0%" }}>
+</ToastContainer>{/* <ToastContainer className="p-3" position="top-start" style={{ "width": "1000px", "color": "white", "margin-right": "0%" }}>
 
-<Toast onClose={() => setWrongclick(false)} show={wrongclick} delay={3000} bg="danger" style={{ "marginTop": "25px" /* ,"marginRight":"20%","marginLeft":"20%","padding ":"0px" */ }} autohide>
+<Toast onClose={() => setWrongclick(false)} show={wrongclick} delay={3000} bg="danger" style={{ "marginTop": "25px" }} autohide>
 
   <Toast.Header>
 
@@ -203,7 +204,7 @@ function Register(props) {
 
   </Toast.Header>
 </Toast>
-</ToastContainer></>
+</ToastContainer> */}</>
   );
 }
 

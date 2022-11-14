@@ -2,7 +2,7 @@
     margin-top: 0px;
     margin-left: 22%;
     margin-right: 22%;
-    height:1500px;
+    height:auto;
     font-family: 'Times New Roman', Times, serif;
     text-align: center;
     color: black;
@@ -38,7 +38,7 @@
         margin-left:0% ;
         margin-right: 0%;
         padding:3px;
-        height:1450px;
+        height:auto;
        
     }
     .weathertitle{

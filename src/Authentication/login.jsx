@@ -32,7 +32,7 @@ import { useContext } from 'react';
     const navigate=useNavigate();
     //var name=nameRef.current.value;
     const passwordRef=useRef("hfs");
-    const newsclicked=localStorage.getItem("clickregister")
+    const storedbeforereg=localStorage.getItem("storedbeforereg")
     console.log(nameRef.current.value)
     
 
@@ -61,14 +61,14 @@ const getPassword = async (e) => {
         localStorage.setItem('name',nameRef.current.value)
         localStorage.setItem('loginstatus',true);
         localStorage.setItem("greeting",true);
-        /* if(newsclicked){navigate('/article/'+newsclicked+"/get/");
-        localStorage.removeItem("clickregister");
+        if(storedbeforereg){navigate('/article/'+storedbeforereg+"/get/");
+        localStorage.removeItem("storedbeforereg");
         window.location.reload();
-        }else{ */
+        }else{ 
        
         
         navigate('/');
-        window.location.reload();
+        window.location.reload();}
         //window.location.reload();
         
         
