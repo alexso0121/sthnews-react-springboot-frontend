@@ -97,7 +97,7 @@ function Article () {
                 {content.map(block=>(<p className="contentth" style={{ "lineHeight": "200%" }}>{block}</p>))}</div>
 
                 <div><Button onClick={handlestored} variant="warning">Stored as Favorite</Button></div>
-                <br /><a href={url}>go to bbc news</a></div><ToastContainer className="p-3" position="top-start" style={{ "width": "1000px", "color": "white", "margin-right": "0%" }}>
+                <br /><a href={url}>go to bbc news</a></div><br/><a href="/">Back to home page</a><ToastContainer className="p-3" position="top-start" style={{ "width": "1000px", "color": "white", "margin-right": "0%" }}>
 
                     <Toast onClose={() => setShow(false)} show={show} delay={3000} /* bg="success" */ style={{ "marginTop": "25px" }} autohide>
 
