@@ -22,21 +22,22 @@ function Weather() {
          /* setIsloading(false) */;
          
 })},[])
-    return ( <div className="weatherwhole">
-        <div className="weathertitle">
-            <h2><strong>Weather Report</strong></h2></div>
+    return ( <div className="weatherbody" ><div className="weatherwhole">
+        {/* <div className="weathertitle">
+            <h2><strong>Weather Report</strong></h2></div> */}
     {/* <div className="generalSituation">
        <p><strong>General Situation of Hong Kong Weather:</strong><br/> {generalSituation}</p></div> */}
-       <ListGroup style={{"marginTop":"20px"}} >
-        {data.map(({week,forecastWeather,forecastMaxtemp,forecastMintemp,forecastWind})=>(
+       <ListGroup style={{"marginTop":"20px","textAlign":"start","padding":"8px"}} >
+        {data.map(({week,forecastWeather,forecastMaxtemp,forecastMintemp,ForecastIcon,forecastDate})=>(
         <Weatheritem
+        forecastDate={forecastDate}
         week={week}
         forecastWeather={forecastWeather} 
         forecastMaxtemp={forecastMaxtemp}
         forecastMintemp={forecastMintemp}
-        forecastWind={forecastWind} /> 
-    ))}</ListGroup>
-    </div> );
+        ForecastIcon={ForecastIcon} /> 
+    ))}</ListGroup><div style={{"marginTop":"10px","font-size":"5px"}}>@data are from <a href="https://www.hko.gov.hk/">https://www.hko.gov.hk/</a></div>
+    </div></div> );
 }
 
 export default Weather;

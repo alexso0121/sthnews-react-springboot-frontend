@@ -52,7 +52,7 @@ function Layout(props){
             navbarScroll
           >
             <Nav.Link style={{ "fontFamily": "Georgia ",'color': "white" }} href="/">Home</Nav.Link>
-
+            <Nav.Link style={{ "fontFamily": "Georgia ",'color': "white" }} href="/weather">Weather Forecast</Nav.Link>
             {userStatus === 'true' ?
               <><Nav.Link onClick={logout} style={{ "fontFamily": "Georgia ",'color': "white" }} href='/' type='submit'>Logout</Nav.Link>
               <NavDropdown style={{ "fontFamily": "Georgia ",'color': "white" }} title="Your account" id="navbarScrollingDropdown">
