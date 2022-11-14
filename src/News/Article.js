@@ -27,7 +27,7 @@ function Article () {
     
     
 
-    useEffect(()=> {fetch("https://newsweb.us-west-2.elasticbeanstalk.com/api/addUser/getnews/"+id).then
+    useEffect(()=> {fetch("https://sthbackend.com/getnews/"+id).then
         (res=>{return res.json()}).then((jsonData)=>{
         setTitle(jsonData.title)
         setDescription(jsonData.description);setImage(jsonData.image)

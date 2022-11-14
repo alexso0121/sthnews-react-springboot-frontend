@@ -48,7 +48,7 @@ import { useContext } from 'react';
 
 const getPassword = async (e) => {
     //https://newsweb.us-west-2.elasticbeanstalk.com
-    const res = await Axios.get("https://sthbackend.com/"+nameRef.current.value);
+    const res = await Axios.get("https://sthbackend.com/password/"+nameRef.current.value);
     console.log(res.data.password)
     
     if(passwordRef.current.value===res.data.password){
