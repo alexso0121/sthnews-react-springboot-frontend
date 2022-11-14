@@ -32,7 +32,8 @@
         height: 50px;
     }
     .card-img-top{
-        height:auto;
+        height:300px ;
+        object-fit: cover;
     }
     .newsitem{
         margin-left: 0;
