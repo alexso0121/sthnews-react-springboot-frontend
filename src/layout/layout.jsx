@@ -21,7 +21,10 @@ function Layout(props){
  
   const historyhref="/history/get"
   const storedhref="/stored/get"
+  const searchref=useRef(null)
+  const navigate=useNavigate()
   const [show,setShow]=useState(false)
+  
   
  
  useEffect(()=>{
@@ -35,6 +38,13 @@ function Layout(props){
   localStorage.removeItem('token')
   localStorage.removeItem('userinfo')
   localStorage.setItem("logout",true)
+ }
+
+ function handlesubmit(e){
+  e.preventDefault();
+  console.log("search"+searchref.current.value);
+  navigate("/"+searchref.current.value)
+
  }
   
   
@@ -73,7 +83,16 @@ function Layout(props){
 
 
           </Nav>
-
+          <Form onSubmit={handlesubmit} className="d-flex">
+            <Form.Control
+              ref={searchref}
+              type="search"
+              placeholder="Search News"
+              className="me-2"
+              aria-label="Search News"
+            />
+            <Button type='submit' variant="outline-success">Search</Button>
+          </Form>
 
         </Navbar.Collapse>
       </Container>

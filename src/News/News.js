@@ -88,7 +88,7 @@ window.location.reload()}
       }else if(id==="4"){
         newsurl="/4"
       }
-      else{newsurl="/0"}
+      else{newsurl="/"+id}
       
       
       const getArticles = async () => {
