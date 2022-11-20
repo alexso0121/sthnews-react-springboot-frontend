@@ -1,4 +1,4 @@
-import { useState,useEffect } from "react";
+import { useState,useEffect, useContext } from "react";
 import { useParams } from "react-router-dom";
 import Axios from "axios";
 import Historyitem from "./Historyitem";
@@ -7,18 +7,22 @@ import Storeditem from "./Storeditem";
 import Button from 'react-bootstrap/Button';
 import Spinner from 'react-bootstrap/Spinner';
 import './person.css'
+import { CatStateContext } from "../CatStateContext";
+import axios from "axios";
 
 function Stored() {
-    let {id}=useParams()
+    const username=localStorage.getItem("name")
+    const token=localStorage.getItem('token')
     
     const [isloading,setIsloading]=useState(true)
     const [data,setData]=useState([])
     const [isedit,setIsedit]=useState(false);
     const [deleteresult,setDeleteResult]=useState(null);
+    const baseurl=useContext(CatStateContext)
     
     
           useEffect(()=>{
-         Axios.get("https://sthbackend.com/getstore/"+id).then((res)=>{
+         Axios.get(baseurl+"getstore/"+username,{headers:{"Authorization":"Bearer "+token}}).then((res)=>{
             console.log(res.data)
             setData(res.data);
             setIsloading(false);
@@ -34,9 +38,9 @@ async function deleteDataByuser() {
         //get the id from input
        
     
-    if (id){
+   
           
-        const res = await fetch("https://sthbackend.com/deleteallstore/"+id, { method: "DELETE" });
+        const res = await axios.delete(baseurl+"deleteallstore/"+username,{headers:{"Authorization":"Bearer "+token}});
     
         const data = await res.text();
     
@@ -48,12 +52,12 @@ async function deleteDataByuser() {
         setDeleteResult(result);
            
         console.log(deleteresult.data)  
-        }
+        
       }
 function deleteall(){
     deleteDataByuser()
-    window.location.reload();
-    window.location.reload();
+   window.location.reload();
+    
 }
 
 function edit(){

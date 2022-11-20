@@ -1,7 +1,8 @@
 import Axios  from "axios";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { Button } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
+import { CatStateContext } from "../CatStateContext";
 import "./info.css"
 
 function Info() {
@@ -12,13 +13,16 @@ function Info() {
     const [useremail,setUseremail]=useState([])
     const [userstatus,setUserstatus]=useState([])
     const navigate=useNavigate();
-    /* https://newsweb.us-west-2.elasticbeanstalk.com/ */
+    const baseurl=useContext(CatStateContext)
+    const token=localStorage.getItem("token")
 
-    fetch("https://sthbackend.com/api/User/"+username).then
+    fetch(baseurl+"jpauser/"+username,{headers:{"Authorization":"Bearer "+token}}).then
         (res=>{return res.json()}).then((jsonData)=>{
+            console.log(jsonData)
         setUserid(jsonData.id)
-        setUserpw(jsonData.password);setUseremail(jsonData.email)
-        setUserstatus(jsonData.status)} )
+        //setUserpw(jsonData.password);
+        setUseremail(jsonData.email)
+        setUserstatus(jsonData.roles)} )
        console.log(userstatus)  
     
     function handleedit(){
@@ -33,9 +37,9 @@ function Info() {
             <img className="info_pict" src="https://icon-library.com/images/profile01-roundedblack-512.png"/>
              <p className="infotext">id :{userid}</p> 
             <p className="infotext">Name :{username}</p>
-            <p className="infotext">Password :{userpw}</p>
+{/*             //<p className="infotext">Password :{userpw}</p> */}
             <p className="infotext">Email :{useremail}</p>
-            <p className="infotext">Status :{userstatus}</p>
+            <p className="infotext">Roles :{userstatus}</p>
         </div>
        {/*  <Button onClick={handleedit} variant="primary">Edit</Button>{' '} */}
     </div> </div>);

@@ -17,6 +17,7 @@ import Buttom from './layout/buttom';
 import Try from './News/try'
 import Weather from './Weathering/weather'
 import { AuthProvider, Usercontext } from './Usercontext';
+import {CatStateContext} from "./CatStateContext"
 
 
 
@@ -53,9 +54,10 @@ const alex='alex'
     <Layout  /* loginstatus={loginStatus}  */// <-- boolean true/false
  /*  logout={handlelogout} */ userStatus={userStatus}
  /*  search={(searchvalue)=>handlesearch({searchvalue})} */ />
+  <CatStateContext.Provider value="http://localhost:5000/">
      <Routes>
      
-    
+     
       <Route path="/" element={<App />} />
       <Route path="/:id" element={<App />} />
       
@@ -64,13 +66,15 @@ const alex='alex'
       <Route path="/info" element={<Info  />}/>
       <Route path="/updateuser" element={<Updateuser  />}/>
       <Route path="/article/:id/get" element={<Article  />}/>
-      <Route path="/history/:id/get" element={<History  />}/>
-      <Route path="/stored/:id/get" element={<Stored  />}/>
+      <Route path="/history/get" element={<History  />}/>
+      <Route path="/stored/get" element={<Stored  />}/>
       <Route path="/try" element={<Try  />}/>
       <Route path="/weather" element={<Weather />}/>
       
       
+      
       </Routes>
+      </CatStateContext.Provider>
     <Buttom />
     </BrowserRouter>
   )

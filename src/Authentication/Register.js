@@ -1,19 +1,20 @@
 import Form from 'react-bootstrap/Form';
 import { Button } from 'react-bootstrap';
 import './Auth.css'
-import { useEffect, useState } from 'react';
-import axios from 'axios';
+import { useContext, useEffect, useState } from 'react';
+import  axios  from 'axios';
 import qs from 'qs';
 import { propTypes } from 'react-bootstrap/esm/Image';
-import { useNavigate } from 'react-router-dom';
+import { Await, useNavigate } from 'react-router-dom';
 import Toast from 'react-bootstrap/Toast';
 import ToastContainer from 'react-bootstrap/ToastContainer';
+import { CatStateContext } from '../CatStateContext';
 
 function Register(props) {
   const [name,setName]=useState('');
   const [password1,setPassword1]=useState('');
   const [password2,setPassword2]=useState('tyt');
-  const [email,setEmail]=useState('');
+  const [emailx,setEmailx]=useState('');
   const [success,setSuccess]=useState(null)
   const navigate=useNavigate()
   //const [validity,setValidity]=useState(true)
@@ -22,6 +23,7 @@ function Register(props) {
   const [emptyinput,setEmptyinput]=useState(false)
   const [wrongclick,setWrongclick]=useState(false)
   const storedbeforereg=localStorage.getItem("storedbeforereg")
+  const baseurl=useContext(CatStateContext);
 
 
   useEffect(()=>{
@@ -34,7 +36,7 @@ function Register(props) {
     }
   },[])
   function valid(e){
-    if(name==''||email==''||password1==''){
+    if(name==''||emailx==''||password1==''){
       //setEmail('');setName('');setPassword1('');setPassword2('');
       e.target.reset()
      
@@ -61,7 +63,7 @@ function Register(props) {
     
   }
 
-  function handlesubmit(e){
+const handlesubmit=async (e) => {
     var success;
     //verify
     e.preventDefault();
@@ -70,19 +72,64 @@ function Register(props) {
        console.log("wrong")
         
     }else{ 
-    
-        const user={"name":name,"password":password1,"email":email,"status":"member"};
-        console.log(user);
-//https://newsweb.us-west-2.elasticbeanstalk.com/api/addUser
-        fetch('https://sthbackend.com/api/addUser',{
+/*       try{
+ */        //const user={"username":name,"password":password1,"email":email,"roles":"ROLE_USER"};
+        const username=name;
+        const password=password1;
+        const email=emailx;
+        const data={ "username":"t",
+        "password":"alx",
+        "email":"soh1@gmail.com",
+         "roles":"User"
+ }
+        //console.log(user);
+        try{
+        const res=await axios({
+          method:"post",
+          url:baseurl+"signup"  ,
+          data:{
+            username:username,
+            password:password,
+            email:email,
+            roles:"ROLE_USER"
+          }        
+        });
+        console.log(res.data)
+        if(res.data=="repeated"){
+          console.log("have username existed already");
+          e.target.reset();
+          setValidpw(true)
+
+        }else{
+          console.log("successful register");
+          localStorage.setItem('loginstatus','true')
+          localStorage.setItem('token',res.data)
+          
+          localStorage.setItem('name',name)
+          localStorage.setItem("greeting",true)
+           if(storedbeforereg){navigate('/article/'+storedbeforereg+"/get/");
+           
+          localStorage.removeItem("storedbeforereg");
+          window.location.reload();
+        }else{ 
+            navigate('/')
+            window.location.reload();}
+
+        }
+      }catch{
+        console.log("error")
+        }
+//https://sthbackend.com/api/addUser
+       /*  fetch('http://localhost:5000/signup',{
             method:'POST',
-            headers:{"Content-Type":"application/json"},
+            headers:{"Content-Type":"application/json"}, 
             body:JSON.stringify(user)
-        }).then((res)=>{return res.json()
+        }).then((res)=>{
+          console.log(res)
             
         }).then((JsonData)=>{
-          console.log(JsonData.id)
-          if(JsonData.id){
+          console.log(JsonData) */
+          /* if(JsonData.id){
             localStorage.setItem('loginstatus','true')
           localStorage.setItem('name',name)
           console.log(JsonData.id)
@@ -95,9 +142,9 @@ function Register(props) {
         }else{ 
             navigate('/')
             window.location.reload();}
-          }else{e.target.reset();setValidpw(true)}
-          /*  */
-        })}}
+          }else{e.target.reset();setValidpw(true)} */
+          
+        /* }) */}}
         /* console.log(success)
         if(success===true){
           console.log('success')
@@ -135,7 +182,7 @@ function Register(props) {
         </Form.Group>
         <Form.Group className="mb-3" controlId="formBasicEmail">
           <Form.Label>Email address</Form.Label>
-          <Form.Control onChange={(e) => setEmail(e.target.value)} type="email" placeholder="Enter email" />
+          <Form.Control onChange={(e) => setEmailx(e.target.value)} type="email" placeholder="Enter email" />
           <Form.Text className="text-muted">
             We'll never share your email with anyone else.
           </Form.Text>

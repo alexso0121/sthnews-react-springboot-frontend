@@ -1,19 +1,23 @@
 import ListGroup from 'react-bootstrap/ListGroup';
 import Button from 'react-bootstrap/Button';
-import { useState } from 'react';
+import { useContext, useState } from 'react';
+import { CatStateContext } from '../CatStateContext';
+import axios from 'axios';
 
 const Historyitem=({title,news_id,edit,id})=>{
-
+    const username=localStorage.getItem("name")
+    const token=localStorage.getItem('token')
     //console.log(edit)
     const href='/article/'+news_id+"/get"
     const [deleteresult,setDeleteResult]=useState(null);
+    const baseurl=useContext(CatStateContext)
     async function deleteDataById() {
         //get the id from input
        
     
         if (id){
           //https://newsweb.us-west-2.elasticbeanstalk.com/
-            const res = await fetch("https://sthbackend.com/deletestore/"+id, { method: "DELETE" });
+            const res = await axios.delete(baseurl+"deletestore/"+id, {headers:{"Authorization":"Bearer "+token}});
     
             const data = await res.text();
     
@@ -34,7 +38,7 @@ const Historyitem=({title,news_id,edit,id})=>{
         deleteDataById();
         
         window.location.reload();
-        window.location.reload();
+        //window.location.reload(); 
 
 
       }

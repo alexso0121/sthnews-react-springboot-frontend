@@ -1,14 +1,17 @@
-import React from "react";
+import React, { useContext } from "react";
 import Card from 'react-bootstrap/Card';
 import ListGroup from 'react-bootstrap/ListGroup';
 import { json, useNavigate } from "react-router-dom";
+import { CatStateContext } from "../CatStateContext";
 import './News.css'
 
 
 const NewsItem=({title,url,image,id,date,category})=>{
     //const date=publishedAt.substring(0,10)
     const navigate=useNavigate();
-    const user_id=localStorage.getItem("userid")
+    const username=localStorage.getItem("name")
+    const baseurl=useContext(CatStateContext)
+    const token=localStorage.getItem("token")
     
         var cat;
         if(category==1){
@@ -33,13 +36,13 @@ const NewsItem=({title,url,image,id,date,category})=>{
         //verify
         
             const user={"news_id":id,
-                        "date":date,"user_id":user_id,
+                        "date":date,"username":username,
                         "title":title};
             console.log(user);
-    //newsweb.us-west-2.elasticbeanstalk.com
-            fetch('https://sthbackend.com/clicknews',{
+    //https://sthbackend.com/clicknews
+            fetch(baseurl+'clicknews',{
                 method:'POST',
-                headers:{"Content-Type":"application/json"},
+                headers:{"Authorization":"Bearer "+token,"Content-Type":"application/json"},
                 body:JSON.stringify(user)
             }).then((res)=>{
                 console.log("user clicked a news");

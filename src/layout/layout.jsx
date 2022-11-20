@@ -18,9 +18,9 @@ import { Usercontext } from '../Usercontext';
 
 function Layout(props){
   const userStatus=localStorage.getItem('loginstatus')
-  const userid=localStorage.getItem("userid")
-  const historyhref="/history/"+userid+"/get"
-  const storedhref="/stored/"+userid+"/get"
+ 
+  const historyhref="/history/get"
+  const storedhref="/stored/get"
   const [show,setShow]=useState(false)
   
  
@@ -30,10 +30,9 @@ function Layout(props){
 
  function logout(){
   console.log("logout")
-  
   localStorage.removeItem('loginstatus')
   localStorage.removeItem('name')  
-  localStorage.removeItem('userid')
+  localStorage.removeItem('token')
   localStorage.removeItem('userinfo')
   localStorage.setItem("logout",true)
  }

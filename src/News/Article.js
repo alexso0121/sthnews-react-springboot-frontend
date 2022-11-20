@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react"
+import { useContext, useEffect, useState } from "react"
 import { SplitButton } from "react-bootstrap"
 import { useNavigate, useParams } from "react-router-dom"
 import Button from 'react-bootstrap/Button';
@@ -9,10 +9,12 @@ import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
 import Spinner from 'react-bootstrap/Spinner';
 import Modal from 'react-bootstrap/Modal';
+import { CatStateContext } from "../CatStateContext";
 
 function Article () {
-    const { id }=useParams()
-    //console.log(id)
+    const {id} =useParams();
+    const username=localStorage.getItem("name")
+    const token=localStorage.getItem('token')
     const navigate=useNavigate
     const [title,setTitle]=useState([])
     //const [name,setUsername]=useState([])
@@ -25,11 +27,12 @@ function Article () {
     const [show, setShow] = useState(false);
     const [isloading,setIsloading]=useState(true)
     const [showM, setShowM] = useState(false);
+    const baseurl=useContext(CatStateContext)
     
     
     
-
-    useEffect(()=> {fetch("https://sthbackend.com/getnews/"+id).then
+    //https://sthbackend.com/
+    useEffect(()=> {fetch(baseurl+"getnews/"+id).then
         (res=>{return res.json()}).then((jsonData)=>{
         setTitle(jsonData.title)
         setDescription(jsonData.description);setImage(jsonData.image)
@@ -61,15 +64,16 @@ function Article () {
                 const Stored={"user_id":userid,
                                 "news_id":id,
                                 "title":title,
+                                "username":username
                             
                            };
                 window.scrollTo({top:0,left:0,behaviour:'smooth'})
                 console.log(Stored);
                 setShow(true)
                 //https://newsweb.us-west-2.elasticbeanstalk.com
-                fetch('https://sthbackend.com/addstore',{
+                fetch(baseurl+'addstore',{
                     method:'POST',
-                    headers:{"Content-Type":"application/json"},
+                    headers:{"Content-Type":"application/json","Authorization":"Bearer "+token},
                     body:JSON.stringify(Stored)
                 }).then((res)=>{
                     console.log("Stored a news");
@@ -96,8 +100,8 @@ function Article () {
                 <p><strong>{description}</strong></p>
                 {content.map(block=>(<p className="contentth" style={{ "lineHeight": "200%" }}>{block}</p>))}</div>
 
-                <div><Button onClick={handlestored} variant="warning">Stored as Favorite</Button></div>
-                <br /><a href={url}>go to bbc news</a></div><br/><a href="/">Back to home page</a><ToastContainer className="p-3" position="top-start" style={{ "width": "1000px", "color": "white", "margin-right": "0%" }}>
+                <div><Button onClick={handlestored} variant="warning">Stored as Favorite</Button>
+                <br /><a href={url}>go to bbc news</a></div><br/><a href="/">Back to home page</a></div><ToastContainer className="p-3" position="top-start" style={{ "width": "1000px", "color": "white", "margin-right": "0%" }}>
 
                     <Toast onClose={() => setShow(false)} show={show} delay={3000} /* bg="success" */ style={{ "marginTop": "25px" }} autohide>
 

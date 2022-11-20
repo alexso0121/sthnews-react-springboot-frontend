@@ -3,7 +3,7 @@
 import Newsnavbar from './Newsnavbar.js';
 import Layout from '../layout/layout.jsx';
 import { useParams } from 'react-router-dom';
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import Axios from 'axios';
 import Toast  from 'react-bootstrap/Toast';
 
@@ -18,6 +18,7 @@ import Buttom from '../layout/buttom.jsx';
 
 
 import NewsItem from './Newsitem.js';
+import { CatStateContext } from '../CatStateContext.js';
 
 
 const App=()=>{
@@ -33,10 +34,13 @@ const App=()=>{
   const [logouttoast,setLogouttoast]=useState(false)
   const [logintoast,setLogintoast]=useState(false)
   const [showM, setShowM] = useState(false);
+  const baseurl=useContext(CatStateContext)
+  console.log("baseurl  : "+baseurl)
     
   function handleClose() {setShowM(false);
     console.log("hide");
-  localStorage.setItem("online",true)}
+  localStorage.setItem("online",true);
+window.location.reload()}
 
   //const online=localStorage.getItem("online")
     useEffect(()=>{
@@ -88,8 +92,8 @@ const App=()=>{
       
       
       const getArticles = async () => {
-        
-        const res = await Axios.get("https://sthbackend.com/shownews"+newsurl);
+        //https://sthbackend.com/shownews
+        const res = await Axios.get(baseurl+"shownews"+newsurl);
         console.log(res)
         setActicles(res.data);
         setIsloading(false);
@@ -101,23 +105,7 @@ const App=()=>{
      // console.log(newsurl)
       // Whatever else we want to do after the state has been updated.
    }, [])
-   /* function result(){
-    if(articles){
-      return <div className='newsitem'>
    
-      {articles?.map(({title,description,url,urlToImage,publishedAt,source})=>(
-      <NewsItem
-      title={title} 
-      desciption={description} 
-      url={url} 
-      urlToImage={urlToImage}
-      publishedAt={publishedAt}
-      source={source.name} /> 
-  ))} </div>;}else{
-    return <h1>No related News found</h1>
-  }
-        
-    } */
     //console.log(articles)
    
 

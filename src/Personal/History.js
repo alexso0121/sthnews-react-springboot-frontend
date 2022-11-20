@@ -1,19 +1,24 @@
-import { useState,useEffect } from "react";
+import { useState,useEffect, useContext } from "react";
 import { useParams } from "react-router-dom";
 import Axios from "axios";
 import Historyitem from "./Historyitem";
 import ListGroup from 'react-bootstrap/ListGroup'
 import './person.css'
+import { CatStateContext } from "../CatStateContext";
 
 function History() {
-    let {id}=useParams()
+   
     console.log('jkdf')
     const [isloading,setIsloading]=useState(true)
     const [data,setData]=useState([])
+    const baseurl=useContext(CatStateContext)
     const [newsid,setNewsid]=useState(null)
+    const Username=localStorage.getItem("name")
+    const token=localStorage.getItem("token")
     //https://newsweb.us-west-2.elasticbeanstalk.com
           useEffect(()=>{
-         Axios.get("https://sthbackend.com/gethistory/"+id).then((res)=>{
+            console.log(token)
+         Axios.get(baseurl+"gethistory/"+Username,{headers:{"Authorization":"Bearer "+token}}).then((res)=>{
             console.log(res.data)
             setData(res.data);
           

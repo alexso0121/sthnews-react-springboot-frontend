@@ -12,13 +12,14 @@ import ToastContainer from 'react-bootstrap/ToastContainer';
 import Alert from 'react-bootstrap/Alert';
 import { useAuth, Usercontext } from '../Usercontext';
 import { useContext } from 'react';
+import { CatStateContext } from '../CatStateContext';
 
 
 
  
 
 
- const Login=(props)=>  {
+ const Login=()=>  {
     /* const {userStatus, setUserStatus}=useContext(Usercontext)
     const [user,setUser]=useState('')
     const auth=useAuth()
@@ -33,6 +34,7 @@ import { useContext } from 'react';
     //var name=nameRef.current.value;
     const passwordRef=useRef("hfs");
     const storedbeforereg=localStorage.getItem("storedbeforereg")
+    const baseurl=useContext(CatStateContext)
     console.log(nameRef.current.value)
     
 
@@ -46,45 +48,44 @@ import { useContext } from 'react';
     //e.target.reset();
    
 }
-//https://sthbackend.com/api/password/alex
+
 const getPassword = async (e) => {
-    //https://newsweb.us-west-2.elasticbeanstalk.com
-    const res = await Axios.get("https://sthbackend.com/api/password/"+nameRef.current.value);
-    console.log('res.data'+res.data)
-    console.log(res)
+    //https://sthbackend.com/
+    const name=nameRef.current.value
+    const password=passwordRef.current.value
+    /* //const baseurl=useContext(CatStateContext) */
+    try{
+    const res = await Axios.post(baseurl+"token",{},{
+        auth:{
+            username:name,
+            password:password//passwordRef.current.value
+        }
+        
+    });
     
-    if(passwordRef.current.value===res.data.password){
         console.log("Ture Password");
-        console.log(nameRef.current.value)
-        console.log(res.data.id)
-        localStorage.setItem('userid',res.data.id)
-        localStorage.setItem('name',nameRef.current.value)
+        console.log(name)
+        console.log(res.data)
+        localStorage.setItem('token',res.data)
+        localStorage.setItem('name',name)
         localStorage.setItem('loginstatus',true);
         localStorage.setItem("greeting",true);
         if(storedbeforereg){navigate('/article/'+storedbeforereg+"/get/");
         localStorage.removeItem("storedbeforereg");
         window.location.reload();
         }else{ 
-       
-        
+           
         navigate('/');
         window.location.reload();}
-        //window.location.reload();
+       
         
-        
-
-
-    }else{
-        console.log("false password")
-        setPwtoast(true)
+    }catch{
+        console.log("error");
         e.target.reset();
+        setPwtoast(true)
     }
 };
         
-        
-    
- 
-    
     
     return (
             
