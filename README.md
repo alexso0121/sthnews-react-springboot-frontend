@@ -39,4 +39,13 @@ website: www.sosthweb.com
 
 -clear outdate news with springboot schedular
 
-#Architecture of reactjs
+# Architecture of reactjs
+click for the src
+
+-News.js in News package is the main page
+
+-index.js is the react router
+
+-weather package is for weather api
+
+
