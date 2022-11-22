@@ -25,14 +25,15 @@ function Info() {
         
         setUseremail(jsonData.email)
         setUserstatus(jsonData.roles)} )
+        .catch(err=>{console.log("is error")
+        localStorage.removeItem('loginstatus')
+                localStorage.removeItem('name')  
+                localStorage.removeItem('token')
+                window.location.reload()
+    })  
+     
        console.log(userstatus) 
-       .catch(err=>{console.log("is error")
-       localStorage.removeItem('loginstatus')
-               localStorage.removeItem('name')  
-               localStorage.removeItem('token')
-               window.location.reload()
-   })  
-    
+      
     function handleedit(){
         const info={"id":userid,"name":username,"pw":userpw,"email":useremail,"status":userstatus}
         localStorage.setItem("userinfo",JSON.stringify(info));
