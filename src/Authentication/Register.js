@@ -9,8 +9,11 @@ import { Await, useNavigate } from 'react-router-dom';
 import Toast from 'react-bootstrap/Toast';
 import ToastContainer from 'react-bootstrap/ToastContainer';
 import { CatStateContext } from '../CatStateContext';
+import Spinner from 'react-bootstrap/Spinner';
 
-function Register(props) {
+
+//signup
+function Register() {
   const [name,setName]=useState('');
   const [password1,setPassword1]=useState('');
   const [password2,setPassword2]=useState('tyt');
@@ -24,65 +27,73 @@ function Register(props) {
   const [wrongclick,setWrongclick]=useState(false)
   const storedbeforereg=localStorage.getItem("storedbeforereg")
   const baseurl=useContext(CatStateContext);
+  const [isregistering,setIsregistering]=useState(false)
+  
 
-
-  useEffect(()=>{
+//?
+  /* useEffect(()=>{
     
     if(localStorage.getItem("clickregister")){
       setWrongclick(true)
       
-
-      //localStorage.removeItem("clickregister")
     }
-  },[])
+  },[]) */
+
+  //check for input data valid ,if true, reset and have warning
   function valid(e){
+    //if empty input 
     if(name==''||emailx==''||password1==''){
-      //setEmail('');setName('');setPassword1('');setPassword2('');
+      
       e.target.reset()
      
       setEmptyinput(true);
-      //window.location.reload();
-      
+     
       
       return false;
+      //if not identicals password
     }else if(password1!=password2){
-      //setEmail('');setName('');setPassword1('');setPassword2('')
+      
       e.target.reset()
       
-      //window.location.reload();
       setPasswordsnot(true);
+      
+      return false;
+      //ensure a valid gmail
+    }else if(emailx.endsWith("@gmail.com")==false){
+      
+      e.target.reset()
+      
+      setWrongclick(true);
       
       return false;
     }else if(typeof(password1)=="number"){
       e.target.reset();
-      //window.location.reload();
+     
 
       setValidpw(true);
       return false;
     }else{return true}
     
   }
-
+//when client submitting the form
 const handlesubmit=async (e) => {
-    var success;
+    
     //verify
     e.preventDefault();
+    
     window.scrollTo({top:0,left:0,behaviour:'smooth'})
      if(valid(e)==false){
        console.log("wrong")
         
     }else{ 
-/*       try{
- */        //const user={"username":name,"password":password1,"email":email,"roles":"ROLE_USER"};
+      //activate the loading statment
+      setIsregistering(true)
+
         const username=name;
         const password=password1;
         const email=emailx;
-        const data={ "username":"t",
-        "password":"alx",
-        "email":"soh1@gmail.com",
-         "roles":"User"
- }
-        //console.log(user);
+       
+       //sending to data to the backend and return a json web taken
         try{
         const res=await axios({
           method:"post",
@@ -95,23 +106,30 @@ const handlesubmit=async (e) => {
           }        
         });
         console.log(res.data)
+        
+        //if username already exist, reset and show reminder
         if(res.data=="repeated"){
           console.log("have username existed already");
           e.target.reset();
           setValidpw(true)
 
         }else{
+          //success register,store data to the localhost
           console.log("successful register");
           localStorage.setItem('loginstatus','true')
           localStorage.setItem('token',res.data)
-          
           localStorage.setItem('name',name)
           localStorage.setItem("greeting",true)
+
+        //if client click the store function before authentication , they will navigate to the register
+        //In this event 'storedbeforereg' and the news_id is stored in the localstorage
+        //After registration they will navigate to the news that they original are
            if(storedbeforereg){navigate('/article/'+storedbeforereg+"/get/");
            
           localStorage.removeItem("storedbeforereg");
           window.location.reload();
         }else{ 
+          //navigate to the main page
             navigate('/')
             window.location.reload();}
 
@@ -119,62 +137,14 @@ const handlesubmit=async (e) => {
       }catch{
         console.log("error")
         }
-//https://sthbackend.com/api/addUser
-       /*  fetch('http://localhost:5000/signup',{
-            method:'POST',
-            headers:{"Content-Type":"application/json"}, 
-            body:JSON.stringify(user)
-        }).then((res)=>{
-          console.log(res)
-            
-        }).then((JsonData)=>{
-          console.log(JsonData) */
-          /* if(JsonData.id){
-            localStorage.setItem('loginstatus','true')
-          localStorage.setItem('name',name)
-          console.log(JsonData.id)
-          localStorage.setItem('userid',JsonData.id)
-          localStorage.setItem("greeting",true)
-           if(storedbeforereg){navigate('/article/'+storedbeforereg+"/get/");
-           
-          localStorage.removeItem("storedbeforereg");
-          window.location.reload();
-        }else{ 
-            navigate('/')
-            window.location.reload();}
-          }else{e.target.reset();setValidpw(true)} */
-          
-        /* }) */}}
-        /* console.log(success)
-        if(success===true){
-          console.log('success')
-          
-          
-        } */
-  
-  
-
-  /* const registerUser=async ()=>{
-    let data={"name":nameRef.current.value,
-              "email":emailRef.current.value,
-              "password":password1Ref.current.value,
-              "status":"member"}
-              console.log(data)
-              fetch('http://localhost:8080/api/User',{
-                method:'POST',
-                headers:{"Content-Type":"application/json"},
-                body:JSON.stringify(data)
-            }).then(()=>{
-                console.log("new user added")
-            })
-     axios.post("http://localhost:8080/api/addUser",qs.stringify({data}))
-            .then(res=>{console.log('res=>',res)}) 
-  } */
+}}
+       
  
   return (
     <><div style={{"height":"1000px"}}><div className='Registerform'>
-      <h3>Register Form</h3><br></br>
+      <h3>Registration Form</h3><br></br>
       <Form onSubmit={handlesubmit}>
+        
         <Form.Group className="mb-3" controlId="formBasicName">
           <Form.Label>Name</Form.Label>
           <Form.Control onChange={(e) => setName(e.target.value)} type="username" placeholder="Enter your name" />
@@ -183,20 +153,18 @@ const handlesubmit=async (e) => {
         <Form.Group className="mb-3" controlId="formBasicEmail">
           <Form.Label>Email address</Form.Label>
           <Form.Control onChange={(e) => setEmailx(e.target.value)} type="email" placeholder="Enter email" />
+          
           <Form.Text className="text-muted">
-            We'll never share your email with anyone else.
+            Please type a vaild gmail which endswith '@gmail.com'.We will sent a email through this email address after successful registration
           </Form.Text>
-        </Form.Group><br></br>
+        </Form.Group>
 
 
         <Form.Group className="mb-3" controlId="formBasicPassword">
           <Form.Label>Password</Form.Label>
           <Form.Control onChange={(e) => setPassword1(e.target.value)} type="password" placeholder="Password" />
-         {/*  {passwordsnot===true&&<p style={{"fontSize":"10px","color":"red"}}>password not identical</p>} */}
-          <Form.Text className="text-muted">
-            Your password must be 8-20 characters long, contain letters and numbers,
-            and must not contain spaces, special characters, or emoji.
-          </Form.Text>
+        
+          
         </Form.Group>
 
         <Form.Group className="mb-3" controlId="formBasicPassword2">
@@ -209,9 +177,13 @@ const handlesubmit=async (e) => {
 
         <Button variant="primary" type="submit">
           Submit
-        </Button><br/><br/>
+        </Button>
+        {isregistering==true&&<div style={{"fontFamily":"Georgia","fontSize":"15px"}} ><br/><p>Loading ,may need some time  <Spinner animation="border" size="sm" /></p></div>}<br/><br/>
+        
         <a href='/login'>already have an account?</a>
-      </Form></div></div><ToastContainer className="p-3" position="top-start" style={{ "width": "1000px", "color": "white", "margin-right": "0%" }}>
+      </Form></div></div>
+      
+      <ToastContainer className="p-3" position="top-start" style={{ "width": "1000px", "color": "white", "margin-right": "0%" }}>
 
 <Toast onClose={() => setEmptyinput(false)} show={emptyinput} delay={3000} bg="danger" style={{ "marginTop": "25px" /* ,"marginRight":"20%","marginLeft":"20%","padding ":"0px" */ }} autohide>
 
@@ -221,7 +193,8 @@ const handlesubmit=async (e) => {
 
   </Toast.Header>
 </Toast>
-</ToastContainer><ToastContainer className="p-3" position="top-start" style={{ "width": "1000px", "color": "white", "margin-right": "0%" }}>
+</ToastContainer>
+<ToastContainer className="p-3" position="top-start" style={{ "width": "1000px", "color": "white", "margin-right": "0%" }}>
 
         <Toast onClose={() => setPasswordsnot(false)} show={passwordsnot} delay={3000} bg="danger" style={{ "marginTop": "25px" /* ,"marginRight":"20%","marginLeft":"20%","padding ":"0px" */ }} autohide>
 
@@ -241,17 +214,17 @@ const handlesubmit=async (e) => {
 
   </Toast.Header>
 </Toast>
-</ToastContainer>{/* <ToastContainer className="p-3" position="top-start" style={{ "width": "1000px", "color": "white", "margin-right": "0%" }}>
+</ToastContainer>{ <ToastContainer className="p-3" position="top-start" style={{ "width": "1000px", "color": "white", "margin-right": "0%" }}>
 
 <Toast onClose={() => setWrongclick(false)} show={wrongclick} delay={3000} bg="danger" style={{ "marginTop": "25px" }} autohide>
 
   <Toast.Header>
 
-    <strong className="me-auto">Please Register before continue !</strong>
+    <strong className="me-auto">invalid email address! Your email should end with '@gmail.com'</strong>
 
   </Toast.Header>
 </Toast>
-</ToastContainer> */}</>
+</ToastContainer> }</>
   );
 }
 

@@ -10,6 +10,7 @@ import './person.css'
 import { CatStateContext } from "../CatStateContext";
 import axios from "axios";
 
+//show the client stored news
 function Stored() {
     const username=localStorage.getItem("name")
     const token=localStorage.getItem('token')
@@ -20,26 +21,23 @@ function Stored() {
     const [deleteresult,setDeleteResult]=useState(null);
     const baseurl=useContext(CatStateContext)
     
-    
+        //get the store news of the client form the backend
           useEffect(()=>{
-         Axios.get(baseurl+"getstore/"+username,{headers:{"Authorization":"Bearer "+token}}).then((res)=>{
-            console.log(res.data)
+         Axios.get(baseurl+"getstore/"+username,
+         {headers:{"Authorization":"Bearer "+token}}).then((res)=>{
+            
             setData(res.data);
             setIsloading(false);
             
             
           
-          /* setIsloading(false) */;
+          
           
 })},[])
           
-
+//function for deleting all stored news of the clientt
 async function deleteDataByuser() {
-        //get the id from input
-       
-    
-   
-          
+        
         const res = await axios.delete(baseurl+"deleteallstore/"+username,{headers:{"Authorization":"Bearer "+token}});
     
         const data = await res.text();
@@ -54,12 +52,14 @@ async function deleteDataByuser() {
         console.log(deleteresult.data)  
         
       }
+//handle event when client click on delete all news
 function deleteall(){
     deleteDataByuser()
    window.location.reload();
     
 }
 
+//show the event of delete buttom
 function edit(){
     if(isedit=== true ){
        
@@ -70,15 +70,18 @@ function edit(){
         
      
      
-    return (<>{isloading === true ? <div className='loading'><h1><strong>Loading Stored News<br/><br/> 
+    return (<>
+    {isloading === true ? <div className='loading'>
+        <h1><strong>Loading Stored News<br/><br/> 
     <Spinner animation="border" /></strong></h1></div> :
-    <div className="wholebody" /* style={{"height":"1000px"}} */>{/* {isloading===true&&<h1>Loading Stored News</h1>} */}
-    <div className="wholelayout" /* style={{"display":"block","textAlign":"center","marginTop":"5%","marginBottom":"5%"}} */>
+    <div className="wholebody" >
+    <div className="wholelayout" >
         <h2 ><strong>{data.length} lines of stored News</strong></h2>
-        </div><div>
-            { data.length!==0&&<Button  style={{"marginBottom":"5px","marginLeft":"3px"}}  onClick={()=>edit()} variant="warning">Edit</Button>}
+        </div><div className="editbuttom">
+            { data.length!==0&&<Button  style={{"marginBottom":"5px"}}  onClick={()=>edit()} variant="warning">Edit</Button>}
             {isedit===true&&<Button onClick={deleteall} style={{"marginBottom":"5px","marginLeft":"5px"}} variant="warning">Delete all</Button>}
             </div>
+
     <ListGroup className="listgroup" >
         {data.map(({title,news_id,id,user_id})=>(
         <Storeditem

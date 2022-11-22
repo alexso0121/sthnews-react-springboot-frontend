@@ -12,6 +12,13 @@
 .listgroup{
     margin-left: 25%;
     margin-right: 25%;
+    text-decoration: none;
+    color: black;
+    
+}
+.editbuttom{
+    margin-left: 25%;
+    margin-right: 25%;
 }
 
 
@@ -26,4 +33,9 @@
         margin-left: 3px;
         margin-right: 3px;
     }
+    .editbuttom{
+        margin-left: 3px;
+        margin-right: 3px;
+    }
+    
 }

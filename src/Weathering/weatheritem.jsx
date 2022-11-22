@@ -2,14 +2,17 @@ import { useState } from 'react';
 import { useEffect } from 'react';
 import { Col, Container, Row } from 'react-bootstrap';
 import ListGroup from 'react-bootstrap/ListGroup';
+
+//the row in listgroup in weather
 function Weatheritem ({week,forecastWeather,forecastMaxtemp,forecastMintemp,ForecastIcon,forecastDate}) {
-   /*  const [weatherimage,setweatherimage]=useState(null); */
-   const baseimageurl="https://www.hko.gov.hk/images/HKOWxIconOutline/pic"
+  
     console.log(ForecastIcon)
     var date=forecastDate;
     var chr='-';
     var pos1=4;
     var pos2=6;
+
+    //reconstruct the date pattern
     const new_date=[date.slice(0,pos1),chr,date.slice(pos1,pos2),chr,date.slice(pos2)]
       
 
@@ -18,7 +21,7 @@ function Weatheritem ({week,forecastWeather,forecastMaxtemp,forecastMintemp,Fore
         <Col x style={{"marginTop":"10px"}} ><h4><strong>{week}</strong></h4></Col>
         <Col></Col>
         <Col >
-            {
+            {  /* matching the weather cartoon with weather */
                 (()=>{switch (ForecastIcon){
                     case 51 : return <img style={{"max-width":"50px","height":"50px"}} src='https://www.hko.gov.hk/images/HKOWxIconOutline/pic51.png'/>
                     case 52 : return <img style={{"max-width":"50px","height":"50px"}} src='https://www.hko.gov.hk/images/HKOWxIconOutline/pic52.png'/>

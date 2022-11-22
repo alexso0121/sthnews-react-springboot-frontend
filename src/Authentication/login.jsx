@@ -3,27 +3,23 @@ import Button from 'react-bootstrap/Button';
 import './Auth.css'
 import Form from 'react-bootstrap/Form';
 import { useState } from 'react';
-import { useEffect } from 'react';
+
 import Axios  from 'axios';
 import { useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Toast from 'react-bootstrap/Toast';
 import ToastContainer from 'react-bootstrap/ToastContainer';
-import Alert from 'react-bootstrap/Alert';
-import { useAuth, Usercontext } from '../Usercontext';
+
 import { useContext } from 'react';
 import { CatStateContext } from '../CatStateContext';
 
 
 
- 
+ //login 
 
 
  const Login=()=>  {
-    /* const {userStatus, setUserStatus}=useContext(Usercontext)
-    const [user,setUser]=useState('')
-    const auth=useAuth()
-  console.log(userStatus) */
+   
   const [pwtoast,setPwtoast]=useState(false)
     const [password,setPassword]=useState("null");
     const [readytosubmit,setReadytosubmit]=useState(false)
@@ -38,27 +34,29 @@ import { CatStateContext } from '../CatStateContext';
     console.log(nameRef.current.value)
     
 
-
+    //submitting the form
   function handlesubmit(e){
     e.preventDefault();
+    //if client with empty imput, raise the toast
     if(nameRef.current.value==''){
         setPwtoast(true)
     }else{
     getPassword(e);}
-    //e.target.reset();
+    
    
 }
 
+//authenticate the user by sending the info to backend and return json web token
 const getPassword = async (e) => {
-    //https://sthbackend.com/
+    
     const name=nameRef.current.value
     const password=passwordRef.current.value
-    /* //const baseurl=useContext(CatStateContext) */
+   
     try{
     const res = await Axios.post(baseurl+"token",{},{
         auth:{
             username:name,
-            password:password//passwordRef.current.value
+            password:password
         }
         
     });
@@ -66,19 +64,24 @@ const getPassword = async (e) => {
         console.log("Ture Password");
         console.log(name)
         console.log(res.data)
+        //store the data to the localstorage
         localStorage.setItem('token',res.data)
         localStorage.setItem('name',name)
         localStorage.setItem('loginstatus',true);
         localStorage.setItem("greeting",true);
+
+        //if client click the store function before authentication , they will navigate to the register
+        //In this event 'storedbeforereg' and the news_id is stored in the localstorage
+        //After registration they will navigate to the news that they original are
         if(storedbeforereg){navigate('/article/'+storedbeforereg+"/get/");
         localStorage.removeItem("storedbeforereg");
         window.location.reload();
         }else{ 
-           
+        //navigate back to the main page
         navigate('/');
         window.location.reload();}
        
-        
+    //if wrong password or username, the form will reset with toast    
     }catch{
         console.log("error");
         e.target.reset();
@@ -127,44 +130,9 @@ const getPassword = async (e) => {
         </Toast.Header>
       </Toast>
     </ToastContainer>
-             </>) }//<--- this works fine <Link
-        //to={{pathname:'/layout',state:loginStatus}} />*/)}
+             </>) }
     
 
 
  
 export default Login ; 
-/* export default class Login extends Component{
- 
-      handlesubmit=e=>{
-        e.preventDefault();
-        const data={
-            firstname:this.firstname
-        }
-        localStorage.setItem('loginstatus',true)
-        console.log(data)
-      
-
-    }
-    
-    render() {
-    return(
-        <form onSubmit={this.handlesubmit} action="">
-        <div>
-            
-            <label>last name</label>
-            <input type="firstname" placeholder="Firstname" onChange={e=>this.firstname=e.target.value}
-             />
-        </div>
-        <Button type='submit'  variant="primary">Primary</Button>
-        </form>
-    ) /* (
-        
-        <><Button onClick={handlesubmit} variant="primary">Primary</Button>{/* <Link
-        to=/*  {{pathname:'/layout',state:loginStatus}} />/* }</>) 
-    
-
-
- 
-
- */

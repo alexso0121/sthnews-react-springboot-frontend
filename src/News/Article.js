@@ -17,7 +17,6 @@ function Article () {
     const token=localStorage.getItem('token')
     const navigate=useNavigate
     const [title,setTitle]=useState([])
-    //const [name,setUsername]=useState([])
     const [description,setDescription]=useState([])
     const [image,setImage]=useState([])
     const [content,setContent]=useState([])
@@ -27,18 +26,36 @@ function Article () {
     const [show, setShow] = useState(false);
     const [isloading,setIsloading]=useState(true)
     const [showM, setShowM] = useState(false);
-    const baseurl=useContext(CatStateContext)
+    const baseurl=useContext(CatStateContext);
+    const [outnews,setOutnews]=useState(false)
     
     
     
     //https://sthbackend.com/
-    useEffect(()=> {fetch(baseurl+"getnews/"+id).then
-        (res=>{return res.json()}).then((jsonData)=>{
+
+    //get the required articles from the backend
+    useEffect(()=> {
+        
+        fetch(baseurl+"getnews/"+id).then
+        (res=>{
+            //if the news is outdated ,activate the component
+            if(!res.json.title){
+                setOutnews(true)
+            }
+            return res.json()})
+        .then((jsonData)=>{
+            //set the articles contents
+            console.log(jsonData)
         setTitle(jsonData.title)
-        setDescription(jsonData.description);setImage(jsonData.image)
-        setContent(jsonData.content.split("/n/"));setDate(jsonData.date);setUrl(jsonData.url)
-        setIsloading(false)} )},[])
-       
+        setDescription(jsonData.description);
+        setImage(jsonData.image);
+        setContent(jsonData.content.split("/n/"));
+        setDate(jsonData.date);
+        setUrl(jsonData.url)
+        setIsloading(false)} )
+         }
+       ,[])
+     
      
     function islive(){
         console.log("is live")
@@ -46,64 +63,66 @@ function Article () {
             navigate(url)
         }
      }
-    function nextline(content){
-        content.split('/n/')
-        
-        for(let block in content){
-            <p>{JSON.stringify(block)}</p>
-        }
-       
-    }
+    
+     //handle client click store news
     function handlestored(){
 
+                //check if the client authenticate
+                //if not, show the modal event
                 if(!localStorage.getItem("loginstatus")){
                     setShowM(true);
                     console.log("havent login");
 
                 }else{
+                    //store the news to the backend
                 const Stored={"user_id":userid,
                                 "news_id":id,
                                 "title":title,
                                 "username":username
                             
                            };
+                           //show the toast (notification)
                 window.scrollTo({top:0,left:0,behaviour:'smooth'})
                 console.log(Stored);
                 setShow(true)
-                //https://newsweb.us-west-2.elasticbeanstalk.com
+                
                 fetch(baseurl+'addstore',{
                     method:'POST',
                     headers:{"Content-Type":"application/json","Authorization":"Bearer "+token},
                     body:JSON.stringify(Stored)
                 }).then((res)=>{
                     console.log("Stored a news");
-                    /* return res.json()
                     
-                     */
-                })/* .then((result=>{
+                })
                    
-                   //alert
-                    
-                })) */}}
+                  }}
     
     
     return ( 
        
         
-       <><> {isloading === true ? <div className='loading'><h1><strong>Loading News<br/><br/> 
+       <><> {outnews===true?<div className="loading" >
+        <h1><strong>
+            Oops! Your news may be expired !
+            </strong></h1></div>:
+       isloading === true ? <div className='loading'><h1><strong>Loading News<br/><br/> 
+       
        <Spinner animation="border" /></strong></h1></div> :
-       <><div className="article" /* style={{ "padding": "5px" }} */>{islive}
-        <div /* style={{"textAlign":"center","margin":"0%"}} */> <h2 style={{ "marginTop": "20px", "marginBottom": "20px" }}><strong>{title}</strong></h2>
-               
-                <img className="picture" /* style={{"width":"500px"}} */ src={image}></img></div>
+       <><div className="article" >{islive}
+        <div >
+             <h2 style={{ "marginTop": "20px", "marginBottom": "20px" }}>
+                <strong>{title}</strong></h2>
+
+                <img className="picture"  src={image}></img></div>
                 <div ><p className="contentth">{date}</p>
                 <p><strong>{description}</strong></p>
                 {content.map(block=>(<p className="contentth" style={{ "lineHeight": "200%" }}>{block}</p>))}</div>
 
                 <div><Button onClick={handlestored} variant="warning">Stored as Favorite</Button>
-                <br /><a href={url}>go to bbc news</a></div><br/><a href="/">Back to home page</a></div><ToastContainer className="p-3" position="top-start" style={{ "width": "1000px", "color": "white", "margin-right": "0%" }}>
+                <br /><a href={url}>go to bbc news</a></div><br/>
+                <a href="/">Back to home page</a></div><ToastContainer className="p-3" position="top-start" style={{ "width": "1000px", "color": "white", "margin-right": "0%" }}>
 
-                    <Toast onClose={() => setShow(false)} show={show} delay={3000} /* bg="success" */ style={{ "marginTop": "25px" }} autohide>
+                    <Toast onClose={() => setShow(false)} show={show} delay={3000}  style={{ "marginTop": "25px" }} autohide>
 
                         <Toast.Header>
 

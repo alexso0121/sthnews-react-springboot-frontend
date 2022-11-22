@@ -16,11 +16,12 @@ function Info() {
     const baseurl=useContext(CatStateContext)
     const token=localStorage.getItem("token")
 
+    //showing the personal infomation of the user
     fetch(baseurl+"jpauser/"+username,{headers:{"Authorization":"Bearer "+token}}).then
         (res=>{return res.json()}).then((jsonData)=>{
             console.log(jsonData)
         setUserid(jsonData.id)
-        //setUserpw(jsonData.password);
+        
         setUseremail(jsonData.email)
         setUserstatus(jsonData.roles)} )
        console.log(userstatus)  

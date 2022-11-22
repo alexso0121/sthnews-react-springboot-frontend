@@ -20,40 +20,24 @@ import { AuthProvider, Usercontext } from './Usercontext';
 import {CatStateContext} from "./CatStateContext"
 
 
-
+//main configuration for regulating each website page in the frontend
 function Index(){
 
-  //const [loginStatus, setLoginStatus] = useState(false);
+ 
   const [userStatus, setUserStatus] = useState();
- // const providerValue=useMemo(()=>({userStatus,setUserStatus}),[userStatus,setUserStatus])
+
  var username; 
 
- /* const handlelogout = () =>{
-  localStorage.removeItem("loginstatus")
-  console.log("logout")
-  setUserStatus(false)
-} */
+ 
 
-
-/* console.log("username:" +username)   
-const login = () => {
-  localStorage.setItem("loginstatus", "1");
-  console.log("login")
-  setUserStatus(true);
-};
-useEffect(() => {
-  const isUserLogined = localStorage.getItem("loginstatus");
-  setUserStatus(Boolean(isUserLogined));
-}, []); */
-const alex='alex'
   return(
     <BrowserRouter>
     
 
 
-    <Layout  /* loginstatus={loginStatus}  */// <-- boolean true/false
- /*  logout={handlelogout} */ userStatus={userStatus}
- /*  search={(searchvalue)=>handlesearch({searchvalue})} */ />
+    <Layout  userStatus={userStatus}
+  />
+ {/*  making a global variable (url for the backend) for applying to all pages */}
   <CatStateContext.Provider value="http://localhost:5000/">
      <Routes>
      
@@ -61,8 +45,8 @@ const alex='alex'
       <Route path="/" element={<App />} />
       <Route path="/:id" element={<App />} />
       
-      <Route path="/login" element={<Login   /* login={login } */ /* handleusername={(name)=>{username=name;console.log("username: "+username)}} */ />}/>
-      <Route path="/register" element={<Register /* login={login } handleusername={(name)=>{username=name;console.log("username: "+username)}} *//>}/>
+      <Route path="/login" element={<Login    />}/>
+      <Route path="/register" element={<Register />}/>
       <Route path="/info" element={<Info  />}/>
       <Route path="/updateuser" element={<Updateuser  />}/>
       <Route path="/article/:id/get" element={<Article  />}/>

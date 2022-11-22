@@ -14,43 +14,44 @@ import Button from 'react-bootstrap/Button';
 import "./News.css"
 import Buttom from '../layout/buttom.jsx';
 
-
-
-
 import NewsItem from './Newsitem.js';
 import { CatStateContext } from '../CatStateContext.js';
 
-
+//Homepage of the website
 const App=()=>{
+  // id determine to show news in the main page
+  // when id is numbers = category ; else = searched result
   let {id}=useParams()
   console.log(id)
-  /* const [newsurl,setNewsurl]=useState(()=>{
-    const initialstate="https://newsapi.org/v2/top-headlines?country=us&apiKey=c75d8c8ba2f1470bb24817af1ed669ee"
-    return initialstate;}) */
-  //console.log(id);
+  
   const [articles, setActicles] = useState([]);
   const [isloading,setIsloading]=useState(true)
   const username=localStorage.getItem("name")
   const [logouttoast,setLogouttoast]=useState(false)
   const [logintoast,setLogintoast]=useState(false)
   const [showM, setShowM] = useState(false);
-  const baseurl=useContext(CatStateContext)
+  const baseurl=useContext(CatStateContext);
+  const [nosearchnews,setNosearchnews]=useState(false);
+
   console.log("baseurl  : "+baseurl)
-    
+
+  //the disclaimer modal at the beginning, if offline with the website, show the modal 
+  useEffect(()=>{
+    if  (!localStorage.getItem("online")){
+      setShowM(true)
+    }
+  },[])
+
+  //the disclaimer modal at the beginning
   function handleClose() {setShowM(false);
     console.log("hide");
   localStorage.setItem("online",true);
 window.location.reload()}
 
-  //const online=localStorage.getItem("online")
-    useEffect(()=>{
-      if  (!localStorage.getItem("online")){
-        setShowM(true)
-      }
-    },[])
+    
   
 
-   
+   //show the authentication notification
     useEffect( ()=>{
       if(localStorage.getItem("logout")){
         setLogouttoast(true)
@@ -61,7 +62,10 @@ window.location.reload()}
         setLogintoast(true);
         
         localStorage.removeItem("greeting")}},[])
- useEffect( ()=>{
+
+        //determine the client is offline or not 
+        //if so,clear the localstorage and show the modal next time
+        useEffect( ()=>{
     
           window.addEventListener("offline",()=>{hasnetwork(false)});
           function hasnetwork(online){console.log(online);
@@ -69,11 +73,14 @@ window.location.reload()}
             localStorage.clear()}
           }
           },[]) 
-  
+        
+          //stop showing disclaimer modal once the client close the modal before 
          useEffect(()=>{ if(localStorage.getItem("online")=="true"){
             setShowM(false);}},[])
     
+    // fetching today news
     useEffect(() => {
+      //get the news base on the category
       let newsurl;
       if(id === undefined){
       newsurl="/0";}
@@ -90,27 +97,26 @@ window.location.reload()}
       }
       else{newsurl="/"+id}
       
-      
+      //main function for requesting a list of news
       const getArticles = async () => {
         //https://sthbackend.com/shownews
         const res = await Axios.get(baseurl+"shownews"+newsurl);
         console.log(res)
         setActicles(res.data);
         setIsloading(false);
+
+        //will activate once the client search a news that show no result
+        if(res.data.length==0){
+          setNosearchnews(true);
+          console.log("nonews")
+        }
        
       };
       getArticles();
     }, [id]);
-    useEffect(() => {
-     // console.log(newsurl)
-      // Whatever else we want to do after the state has been updated.
-   }, [])
+    
    
-    //console.log(articles)
-   
-
   
-            //return "https://newsapi.org/v2/top-headlines?country=us&apiKey=c75d8c8ba2f1470bb24817af1ed669ee";}
  
   return (<><><Newsnavbar />
   
@@ -120,7 +126,8 @@ window.location.reload()}
         <Modal.Header >
           <Modal.Title>@Disclaimer</Modal.Title>
         </Modal.Header>
-        <Modal.Body>This website is only for learning purpose. All the News are from @BBC News
+        <Modal.Body>This website is only for learning purpose. All the News are web scrap from @BBC News.
+          <br/>The news will automatically refresh at HKT 08:00 every day
         
 
         </Modal.Body>
@@ -135,6 +142,9 @@ window.location.reload()}
         </Modal.Footer>
       </Modal>
 
+    {nosearchnews===true &&<div className='loading'><h1>
+      <strong>No Search News found!</strong>
+      </h1></div>}
 
     {isloading === true ? <div className='loading'><h1><strong>Loading News<br/><br/> 
       <Spinner animation="border" /></strong></h1></div> :
@@ -154,7 +164,7 @@ window.location.reload()}
 
         <Toast.Header>
 
-          <strong className="me-auto" /* style={{"color":"white"}} */>You have logout !</strong>
+          <strong className="me-auto" >You have logout !</strong>
 
         </Toast.Header>
       </Toast>
