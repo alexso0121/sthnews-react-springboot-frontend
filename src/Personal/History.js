@@ -27,12 +27,7 @@ function History() {
           
           setIsloading(false);
           
-}) .catch(err=>{console.log("is error")
-localStorage.removeItem('loginstatus')
-        localStorage.removeItem('name')  
-        localStorage.removeItem('token')
-        window.location.reload()
-}) },[])
+})},[])
           
          
         

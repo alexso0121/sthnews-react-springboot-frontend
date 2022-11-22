@@ -25,13 +25,7 @@ function Info() {
         
         setUseremail(jsonData.email)
         setUserstatus(jsonData.roles)} )
-        .catch(err=>{console.log("is error")
-        localStorage.removeItem('loginstatus')
-                localStorage.removeItem('name')  
-                localStorage.removeItem('token')
-                window.location.reload()
-    })  
-     
+        
        console.log(userstatus) 
       
     function handleedit(){
