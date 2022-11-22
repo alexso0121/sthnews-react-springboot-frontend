@@ -34,6 +34,7 @@ function History() {
      
      
     return ( <div className="wholebody">
+        
         <div className="wholelayout" ><h2 >
             <strong>Search History</strong></h2></div><ListGroup className="listgroup"> 
         {data?.map(({title,user_id,news_id,url})=>(

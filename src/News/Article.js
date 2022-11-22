@@ -28,6 +28,7 @@ function Article () {
     const [showM, setShowM] = useState(false);
     const baseurl=useContext(CatStateContext);
    
+   
     
     
     
@@ -94,6 +95,7 @@ function Article () {
                     headers:{"Content-Type":"application/json","Authorization":"Bearer "+token},
                     body:JSON.stringify(Stored)
                 }).then((res)=>{
+                    
                     console.log("Stored a news");
                     
                 })

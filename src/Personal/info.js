@@ -3,7 +3,8 @@ import { useContext, useState } from "react";
 import { Button } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import { CatStateContext } from "../CatStateContext";
-import "./info.css"
+import "./info.css";
+
 
 function Info() {
     const username=localStorage.getItem('name')

@@ -37,9 +37,10 @@ function Index(){
 
     <Layout  userStatus={userStatus}
   />
+{/* http://localhost:5000/*/}
 
  {/*  making a global variable (url for the backend) for applying to all pages */}
-  <CatStateContext.Provider value="https://sthbackend.com/">
+  <CatStateContext.Provider value="https://sthbackend.com/ ">
      <Routes>
      
      
