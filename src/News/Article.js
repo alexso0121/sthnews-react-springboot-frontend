@@ -27,7 +27,7 @@ function Article () {
     const [isloading,setIsloading]=useState(true)
     const [showM, setShowM] = useState(false);
     const baseurl=useContext(CatStateContext);
-    const [outnews,setOutnews]=useState(false)
+   
     
     
     
@@ -39,11 +39,11 @@ function Article () {
         fetch(baseurl+"getnews/"+id).then
         (res=>{
             //if the news is outdated ,activate the component
-            if(!res.json.title){
-                setOutnews(true)
-            }
+            
+            setIsloading(false)
             return res.json()})
         .then((jsonData)=>{
+           
             //set the articles contents
             console.log(jsonData)
         setTitle(jsonData.title)
@@ -52,9 +52,12 @@ function Article () {
         setContent(jsonData.content.split("/n/"));
         setDate(jsonData.date);
         setUrl(jsonData.url)
-        setIsloading(false)} )
+       } )
          }
        ,[])
+       useEffect(()=>{
+        console.log(title)
+       },[isloading])
      
      
     function islive(){
@@ -101,13 +104,13 @@ function Article () {
     return ( 
        
         
-       <><> {outnews===true?<div className="loading" >
+       <><> {
+       isloading === true ? <div className='loading'><h1><strong>Loading News<br/><br/> 
+       
+       <Spinner animation="border" /></strong></h1></div> :title.length===0?<div className="loading" >
         <h1><strong>
             Oops! Your news may be expired !
             </strong></h1></div>:
-       isloading === true ? <div className='loading'><h1><strong>Loading News<br/><br/> 
-       
-       <Spinner animation="border" /></strong></h1></div> :
        <><div className="article" >{islive}
         <div >
              <h2 style={{ "marginTop": "20px", "marginBottom": "20px" }}>

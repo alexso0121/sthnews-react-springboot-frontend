@@ -28,7 +28,7 @@ function Index(){
 
  var username; 
 
- 
+ //
 
   return(
     <BrowserRouter>
@@ -37,6 +37,7 @@ function Index(){
 
     <Layout  userStatus={userStatus}
   />
+
  {/*  making a global variable (url for the backend) for applying to all pages */}
   <CatStateContext.Provider value="https://sthbackend.com/">
      <Routes>
