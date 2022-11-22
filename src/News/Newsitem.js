@@ -53,7 +53,8 @@ const NewsItem=({title,url,image,id,date,category})=>{
                 headers:{"Authorization":"Bearer "+token,"Content-Type":"application/json"},
                 body:JSON.stringify(user)
             }).then((res)=>{ 
-                navigate('/article/'+id +'/get')
+                if(res){
+                navigate('/article/'+id +'/get')}
 
                 
         })
