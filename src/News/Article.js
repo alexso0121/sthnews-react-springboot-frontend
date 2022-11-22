@@ -98,7 +98,12 @@ function Article () {
                     
                     console.log("Stored a news");
                     
-                })
+                }) .catch(err=>{console.log("is error")
+                localStorage.removeItem('loginstatus')
+                        localStorage.removeItem('name')  
+                        localStorage.removeItem('token')
+                        window.location.reload()
+            }) 
                    
                   }}
     

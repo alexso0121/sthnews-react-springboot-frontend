@@ -33,7 +33,12 @@ function Stored() {
           
           
           
-})},[])
+}) .catch(err=>{console.log("is error")
+localStorage.removeItem('loginstatus')
+        localStorage.removeItem('name')  
+        localStorage.removeItem('token')
+        window.location.reload()
+}) },[])
           
 //function for deleting all stored news of the clientt
 async function deleteDataByuser() {
