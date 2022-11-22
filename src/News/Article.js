@@ -129,7 +129,7 @@ function Article () {
 
                         <Toast.Header>
 
-                            <strong className="me-auto">You have stored the news !</strong>
+                            <strong className="me-auto">You have stored the news to My News !</strong>
 
                         </Toast.Header>
                     </Toast>
