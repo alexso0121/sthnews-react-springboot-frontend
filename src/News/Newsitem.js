@@ -59,8 +59,13 @@ const NewsItem=({title,url,image,id,date,category})=>{
                 
         })
         
-        .catch(err=>console.log("is error")) 
-                setTokenisexpired(true)}}
+        .catch(err=>{console.log("is error")
+        setTokenisexpired(true)
+    }) 
+                //setTokenisexpired(true)
+                
+            }
+            }
            
     return(
     <Card className="wholecard">
