@@ -1,70 +1,51 @@
-# Getting Started with Create React App
+# Newsreact
+(this repository is responsible for the reactjs script)
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+frontend server: reactjs__javascript (with react bootstrap)
 
-## Available Scripts
+backend server: springboot__java
 
-In the project directory, you can run:
+database: mysql
 
-### `npm start`
+cloud server: aws elastic bean + aws amplify
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+backend script: https://github.com/alexso0121/sthnews-reactjs-springboot
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+website: www.sosthweb.com
 
-### `npm test`
+(mainly designed based on mobile phone)
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+# Version 1
+-basic authentication
 
-### `npm run build`
+-web scraping news (jsoup) every day (HKT 08:00) and store to the database by springboot scheduler
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+-weather forecast by hk observation free api
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+-store news function after autheticate
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+-read history function after authenticate
 
-### `npm run eject`
+-personal profile
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+# Version 2
+-springboot security to protect the database from being accessed 
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+-json web token is used to allow authentication to backend server
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+-search news function
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+-send email to the client after sign up when valid
 
-## Learn More
+-clear outdate news with springboot schedular
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+# Architecture of reactjs
+click for the src
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+-News.js in News package is the main page
 
-### Code Splitting
+-index.js is the react router
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+-weather package is for weather api
 
-### Analyzing the Bundle Size
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
